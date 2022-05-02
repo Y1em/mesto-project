@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Место</title>
+
+    <link rel="stylesheet" href="./index.css" />
+  </head>
+
+  <body class="body">
+    <section class="page">
+      <header class="header">
+        <img class="header__logo" src="./images/logo fff.svg" alt="Логотип." />
+      </header>
+
+      <main class="content">
+        <section class="profile">
+          <img
+            class="profile__image"
+            src="./images/Avatar.jpg"
+            alt="Фото профиля."
+          />
+
+          <div class="profile__description">
+            <h1 class="profile__name">
+              Жак-Ив Кусто
+              <div class="profile__button-edit"></div>
+            </h1>
+
+            <p class="profile__about">Исследователь океана</p>
+          </div>
+
+          <div class="profile__button-add"></div>
+        </section>
+
+        <section class="gallery">
+          <div class="gallery__card">
+            <img
+              class="gallery__photo"
+              src="./images/kamchatka.jpg"
+              alt="Долина гейзеров."
+            />
+            <div class="gallery__card-bottom">
+              <h3 class="gallery__subtitle">Долина гейзеров</h3>
+              <div class="gallery__like"></div>
+            </div>
+          </div>
+
+          <div class="gallery__card">
+            <img
+              class="gallery__photo"
+              src="./images/volcan.jpg"
+              alt="Вулкан Креницына."
+            />
+            <div class="gallery__card-bottom">
+              <h3 class="gallery__subtitle">Вулкан Креницына</h3>
+              <div class="gallery__like gallery__like_active"></div>
+            </div>
+          </div>
+
+          <div class="gallery__card">
+            <img
+              class="gallery__photo"
+              src="./images/caves.jpg"
+              alt="Кунгурские пещеры."
+            />
+            <div class="gallery__card-bottom">
+              <h3 class="gallery__subtitle">Кунгурские пещеры</h3>
+              <div class="gallery__like"></div>
+            </div>
+          </div>
+
+          <div class="gallery__card">
+            <img
+              class="gallery__photo"
+              src="./images/Elbrus.jpg"
+              alt="Эльбрус."
+            />
+            <div class="gallery__card-bottom">
+              <h3 class="gallery__subtitle">Эльбрус</h3>
+              <div class="gallery__like"></div>
+            </div>
+          </div>
+
+          <div class="gallery__card">
+            <img
+              class="gallery__photo"
+              src="./images/Kareliya.jpeg"
+              alt="Карелия."
+            />
+            <div class="gallery__card-bottom">
+              <h3 class="gallery__subtitle">Карелия</h3>
+              <div class="gallery__like"></div>
+            </div>
+          </div>
+
+          <div class="gallery__card">
+            <img
+              class="gallery__photo"
+              src="./images/pallars.jpg"
+              alt="СТОЛБЫ Сэргэ."
+            />
+            <div class="gallery__card-bottom">
+              <h3 class="gallery__subtitle">Столбы Сэргэ</h3>
+              <div class="gallery__like gallery__like_active"></div>
+            </div>
+          </div>
+        </section>
+      </main>
+      <footer class="footer">© 2020 Mesto Russia</footer>
+    </section>
+
+    <section class="overlay">
+      <div class="form">
+        <h3 class="form__title">Редактировать профиль</h3>
+        <fieldset class="form__input">
+          <input
+            class="form__name"
+            placeholder="Представьтесь, пожалуйста"
+            required
+          />
+          <input
+            class="form__about"
+            placeholder="Чем вы занимаетесь?"
+            required
+          />
+        </fieldset>
+        <button class="form__button">Сохранить</button>
+
+        <div class="form__button-close"></div>
+      </div>
+    </section>
+  </body>
+</html>
