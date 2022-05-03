@@ -1,18 +1,11 @@
-.form__name {
+.popup__input {
   border: 0;
-  border-bottom: 1px solid #bcbcc4;
+  border-bottom: 1px solid rgba(0, 0, 0, .2);
   width: 100%;
-  margin-top: 48px;
   font-style: normal;
   font-weight: 400;
   font-size: 14px;
   line-height: 27px; /*высота строки не совпадает с фигма в угоду перфект пикселя*/
   padding: 0;
   vertical-align: top;
-}
-
-@media screen and (max-width: 600px) {
-  .form__name {
-    margin-top: 75px;
-  }
 }

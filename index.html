@@ -6,13 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Место</title>
 
-    <link rel="stylesheet" href="./index.css" />
+    <link rel="stylesheet" href="./pages/index.css" />
   </head>
 
   <body class="body">
-    <section class="page">
+    <div class="page">
       <header class="header">
-        <img class="header__logo" src="./images/logo fff.svg" alt="Логотип." />
+        <img class="header__logo" src="./images/logo_fff.svg" alt="Логотип." />
       </header>
 
       <main class="content">
@@ -24,15 +24,22 @@
           />
 
           <div class="profile__description">
-            <h1 class="profile__name">
-              Жак-Ив Кусто
-              <div class="profile__button-edit"></div>
-            </h1>
-
+            <p class="profile__name">Жак-Ив Кусто</p>
+            <button
+              type="button"
+              class="profile__button-edit"
+              aria-label="edit profile"
+              title="Редактировать профиль"
+            ></button>
             <p class="profile__about">Исследователь океана</p>
           </div>
 
-          <div class="profile__button-add"></div>
+          <button
+            type="button"
+            class="profile__button-add"
+            aria-label="add photo"
+            title="Добавить фото"
+          ></button>
         </section>
 
         <section class="gallery">
@@ -44,7 +51,12 @@
             />
             <div class="gallery__card-bottom">
               <h3 class="gallery__subtitle">Долина гейзеров</h3>
-              <div class="gallery__like"></div>
+              <button
+                type="button"
+                class="gallery__like"
+                aria-label="like"
+                title="Нравится"
+              ></button>
             </div>
           </div>
 
@@ -56,7 +68,12 @@
             />
             <div class="gallery__card-bottom">
               <h3 class="gallery__subtitle">Вулкан Креницына</h3>
-              <div class="gallery__like gallery__like_active"></div>
+              <button
+                type="button"
+                class="gallery__like gallery__like_active"
+                aria-label="like"
+                title="Нравится"
+              ></button>
             </div>
           </div>
 
@@ -68,7 +85,12 @@
             />
             <div class="gallery__card-bottom">
               <h3 class="gallery__subtitle">Кунгурские пещеры</h3>
-              <div class="gallery__like"></div>
+              <button
+                type="button"
+                class="gallery__like"
+                aria-label="like"
+                title="Нравится"
+              ></button>
             </div>
           </div>
 
@@ -80,7 +102,12 @@
             />
             <div class="gallery__card-bottom">
               <h3 class="gallery__subtitle">Эльбрус</h3>
-              <div class="gallery__like"></div>
+              <button
+                type="button"
+                class="gallery__like"
+                aria-label="like"
+                title="Нравится"
+              ></button>
             </div>
           </div>
 
@@ -92,7 +119,12 @@
             />
             <div class="gallery__card-bottom">
               <h3 class="gallery__subtitle">Карелия</h3>
-              <div class="gallery__like"></div>
+              <button
+                type="button"
+                class="gallery__like"
+                aria-label="like"
+                title="Нравится"
+              ></button>
             </div>
           </div>
 
@@ -104,33 +136,49 @@
             />
             <div class="gallery__card-bottom">
               <h3 class="gallery__subtitle">Столбы Сэргэ</h3>
-              <div class="gallery__like gallery__like_active"></div>
+              <button
+                type="button"
+                class="gallery__like gallery__like_active"
+                aria-label="like"
+                title="Нравится"
+              ></button>
             </div>
           </div>
         </section>
       </main>
-      <footer class="footer">© 2020 Mesto Russia</footer>
-    </section>
+      <footer class="footer">
+        <p class="footer__copyright">© 2020 Mesto Russia</p>
+      </footer>
+    </div>
 
-    <section class="overlay">
-      <div class="form">
-        <h3 class="form__title">Редактировать профиль</h3>
-        <fieldset class="form__input">
-          <input
-            class="form__name"
-            placeholder="Представьтесь, пожалуйста"
-            required
-          />
-          <input
-            class="form__about"
-            placeholder="Чем вы занимаетесь?"
-            required
-          />
-        </fieldset>
-        <button class="form__button">Сохранить</button>
-
-        <div class="form__button-close"></div>
-      </div>
+    <section class="popup">
+      <button
+        class="popup__button-close"
+        type="button"
+        aria-label="close"
+        title="Закрыть"
+      ></button>
+      <form class="popup__container" name="edit profile">
+        <h3 class="popup__title">Редактировать профиль</h3>
+        <input
+          class="popup__input popup__input_el_name"
+          placeholder="Представьтесь, пожалуйста"
+          required
+        />
+        <input
+          class="popup__input popup__input_el_about"
+          placeholder="Чем вы занимаетесь?"
+          required
+        />
+        <button
+          type="submit"
+          class="popup__button-confirm"
+          aria-label="confirm"
+          title="Сохранить"
+        >
+          Сохранить
+        </button>
+      </form>
     </section>
   </body>
 </html>

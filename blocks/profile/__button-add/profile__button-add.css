@@ -3,6 +3,8 @@
   min-height: 50px;
   margin-left: auto;
   background: url(../../../images/Add\ Button.svg) center/contain no-repeat;
+  padding: 0;
+  border: 0;
 }
 
 @media screen and (max-width: 850px) {

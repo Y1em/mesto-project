@@ -1,6 +1,6 @@
 .gallery__subtitle {
   margin: 0;
-  width: 100%;
+  width: calc(100% - 22px);
   font-family: 'Inter';
   font-style: normal;
   font-weight: 900;
