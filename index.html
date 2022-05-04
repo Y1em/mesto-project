@@ -152,33 +152,35 @@
     </div>
 
     <section class="popup">
-      <button
+      <div class="popup__container">
+        <button
         class="popup__button-close"
         type="button"
         aria-label="close"
         title="Закрыть"
       ></button>
-      <form class="popup__container" name="edit profile">
-        <h3 class="popup__title">Редактировать профиль</h3>
-        <input
-          class="popup__input popup__input_el_name"
-          placeholder="Представьтесь, пожалуйста"
-          required
-        />
-        <input
-          class="popup__input popup__input_el_about"
-          placeholder="Чем вы занимаетесь?"
-          required
-        />
-        <button
-          type="submit"
-          class="popup__button-confirm"
-          aria-label="confirm"
-          title="Сохранить"
-        >
-          Сохранить
-        </button>
-      </form>
+        <form class="popup__form" name="edit profile">
+          <h3 class="popup__title">Редактировать профиль</h3>
+          <input
+            class="popup__input popup__input_el_name"
+            placeholder="Представьтесь, пожалуйста"
+            required
+          />
+          <input
+            class="popup__input popup__input_el_about"
+            placeholder="Чем вы занимаетесь?"
+            required
+          />
+          <button
+            type="submit"
+            class="popup__button-confirm"
+            aria-label="confirm"
+            title="Сохранить"
+          >
+            Сохранить
+          </button>
+        </form>
+      </div>
     </section>
   </body>
 </html>

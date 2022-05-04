@@ -4,14 +4,13 @@
   background: url(../../../images/Close\ Icon.svg) no-repeat center/contain;
   padding: 0;
   border: 0;
-  position: relative;
-  left: calc((430px + 16px)/2 + 8px);
-  bottom: 8px;
+  margin-bottom: 8px;
+  margin-left: auto;
+  cursor: pointer;
 }
 
 @media screen and (max-width: 600px) {
   .popup__button-close {
-    left: calc((430px)/2 - 16px/2);
     width: 20px;
     height: 20px;
   }
@@ -19,7 +18,7 @@
 
 @media screen and (max-width: 468px) {
   .popup__button-close {
-    left: calc(50% - 16px/2);
+
   }
 }
 

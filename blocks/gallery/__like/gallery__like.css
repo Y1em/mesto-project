@@ -4,8 +4,10 @@
   background: url(../../../images/like.svg) center/contain no-repeat;
   border: 0;
   padding: 0;
+
 }
 
 .gallery__like:hover {
   opacity: .5;
+  cursor: pointer;
 }

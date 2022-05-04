@@ -5,6 +5,7 @@
   background: url(../../../images/Add\ Button.svg) center/contain no-repeat;
   padding: 0;
   border: 0;
+
 }
 
 @media screen and (max-width: 850px) {
@@ -22,4 +23,5 @@
 
 .profile__button-add:hover {
   opacity: .6;
+  cursor: pointer;
 }

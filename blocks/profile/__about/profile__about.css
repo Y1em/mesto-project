@@ -7,6 +7,14 @@
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
+  width: 100%;
+
+}
+
+@media screen and (max-width: 850px) {
+  .profile__about {
+    text-align: center;
+  }
 }
 
 @media screen and (max-width: 600px) {
