@@ -43,113 +43,40 @@
         </section>
 
         <section class="gallery">
-          <div class="gallery__card">
-            <img
-              class="gallery__photo"
-              src="./images/kamchatka.jpg"
-              alt="Долина гейзеров."
-            />
-            <div class="gallery__card-bottom">
-              <h3 class="gallery__subtitle">Долина гейзеров</h3>
-              <button
-                type="button"
-                class="gallery__like"
-                aria-label="like"
-                title="Нравится"
-              ></button>
-            </div>
-          </div>
 
-          <div class="gallery__card">
-            <img
-              class="gallery__photo"
-              src="./images/volcan.jpg"
-              alt="Вулкан Креницына."
-            />
-            <div class="gallery__card-bottom">
-              <h3 class="gallery__subtitle">Вулкан Креницына</h3>
+          <template class="gallery__template">
+            <div class="gallery__card">
               <button
                 type="button"
-                class="gallery__like gallery__like_active"
-                aria-label="like"
-                title="Нравится"
-              ></button>
+                class="gallery__delete"
+                aria-label="delete"
+                title="Удалить">
+              </button>
+              <img
+                class="gallery__photo"
+                src=""
+                alt=""
+              />
+              <div class="gallery__card-bottom">
+                <h3 class="gallery__subtitle"></h3>
+                <button
+                  type="button"
+                  class="gallery__like"
+                  aria-label="like"
+                  title="Нравится"
+                ></button>
+              </div>
             </div>
-          </div>
+          </template>
 
-          <div class="gallery__card">
-            <img
-              class="gallery__photo"
-              src="./images/caves.jpg"
-              alt="Кунгурские пещеры."
-            />
-            <div class="gallery__card-bottom">
-              <h3 class="gallery__subtitle">Кунгурские пещеры</h3>
-              <button
-                type="button"
-                class="gallery__like"
-                aria-label="like"
-                title="Нравится"
-              ></button>
-            </div>
-          </div>
-
-          <div class="gallery__card">
-            <img
-              class="gallery__photo"
-              src="./images/Elbrus.jpg"
-              alt="Эльбрус."
-            />
-            <div class="gallery__card-bottom">
-              <h3 class="gallery__subtitle">Эльбрус</h3>
-              <button
-                type="button"
-                class="gallery__like"
-                aria-label="like"
-                title="Нравится"
-              ></button>
-            </div>
-          </div>
-
-          <div class="gallery__card">
-            <img
-              class="gallery__photo"
-              src="./images/Kareliya.jpeg"
-              alt="Карелия."
-            />
-            <div class="gallery__card-bottom">
-              <h3 class="gallery__subtitle">Карелия</h3>
-              <button
-                type="button"
-                class="gallery__like"
-                aria-label="like"
-                title="Нравится"
-              ></button>
-            </div>
-          </div>
-
-          <div class="gallery__card">
-            <img
-              class="gallery__photo"
-              src="./images/pallars.jpg"
-              alt="СТОЛБЫ Сэргэ."
-            />
-            <div class="gallery__card-bottom">
-              <h3 class="gallery__subtitle">Столбы Сэргэ</h3>
-              <button
-                type="button"
-                class="gallery__like gallery__like_active"
-                aria-label="like"
-                title="Нравится"
-              ></button>
-            </div>
-          </div>
         </section>
       </main>
       <footer class="footer">
-        <p class="footer__copyright">© 2020 Mesto Russia</p>
+        <p class="footer__copyright">© 2022 Mesto Russia</p>
       </footer>
     </div>
+
+    <!-- Редактировать профиль -->
 
     <section class="popup">
       <div class="popup__container">
@@ -182,5 +109,65 @@
         </form>
       </div>
     </section>
+
+    <!-- Добавить новое место -->
+
+    <section class="popup">
+      <div class="popup__container">
+        <button
+        class="popup__button-close"
+        type="button"
+        aria-label="close"
+        title="Закрыть"
+      ></button>
+      <form class="popup__form" name="add place">
+        <h3 class="popup__title">Новое место</h3>
+        <input
+          class="popup__input popup__input_el_place"
+          placeholder="Название"
+          required
+        />
+        <input
+          class="popup__input popup__input_el_url"
+          placeholder="Ссылка на картинку"
+          required
+          type="url"
+        />
+        <button
+          type="confirm"
+          class="popup__button-confirm"
+          aria-label="confirm"
+          title="Сохранить"
+        >
+          Создать
+        </button>
+      </form>
+      </div>
+    </section>
+
+    <!-- Открыть картинку -->
+
+    <section class="popup">
+      <div class="popup__container">
+        <button
+        class="popup__button-close"
+        type="button"
+        aria-label="close"
+        title="Закрыть"
+      ></button>
+
+        <img
+          class="popup__image"
+          src=""
+          alt=""
+        >
+
+        <p class="popup__subtitle"></p>
+
+      </div>
+    </section>
+
+    <script src="./pages/jscript.js"></script>
   </body>
 </html>
+

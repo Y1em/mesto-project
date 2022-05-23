@@ -9,6 +9,7 @@
   align-items: center;
   padding: 34px 36px 37px;
   box-sizing: border-box;
+  margin: 40px; /*!*/
 }
 
 @media screen and (max-width: 600px) {
