@@ -76,56 +76,56 @@ function addCard(card, gallery) {
   gallery.prepend(card);
 }
 
-// Функция создания стартовых карточек
+// Функция создания карточки
 
 function createCards(obj) {
 
-  obj.forEach(function(item) {
+  const card = cardTemplate.querySelector(".gallery__card").cloneNode(true);
+  const cardPhoto = card.querySelector(".gallery__photo");
+  const cardSubtitle = card.querySelector(".gallery__subtitle");
 
-    const card = cardTemplate.querySelector(".gallery__card").cloneNode(true);
-    const cardPhoto = card.querySelector(".gallery__photo");
-    const cardSubtitle = card.querySelector(".gallery__subtitle");
+  cardPhoto.setAttribute("src", obj.link);
+  cardPhoto.setAttribute("alt", obj.name);
+  cardSubtitle.textContent = obj.name;
 
-    cardPhoto.setAttribute("src", item.link);
-    cardPhoto.setAttribute("alt", item.name);
-    cardSubtitle.textContent = item.name;
+  card.querySelector(".gallery__like").addEventListener("click", function (event) {
+    event.target.classList.toggle("gallery__like_active");
+  });
 
-    card.querySelector(".gallery__like").addEventListener("click", function (event) {
-      event.target.classList.toggle("gallery__like_active");
-    });
+  card.querySelector(".gallery__delete").addEventListener("click", function (event) {
+    event.target.closest(".gallery__card").remove();
+  });
 
-    card.querySelector(".gallery__delete").addEventListener("click", function (event) {
-      event.target.closest(".gallery__card").remove();
-    });
+  cardPhoto.addEventListener("click", function () {
+    openPopup(popupPhoto);
+    popupSubtitle.textContent = cardSubtitle.textContent;
+    popupImage.setAttribute("src", cardPhoto.getAttribute("src"));
+    popupImage.setAttribute("alt", cardPhoto.getAttribute("alt"));
+  });
 
-    cardPhoto.addEventListener("click", function () {
-      openPopup(popupPhoto);
-      popupSubtitle.textContent = cardSubtitle.textContent;
-      popupImage.setAttribute("src", cardPhoto.getAttribute("src"));
-      popupImage.setAttribute("alt", cardPhoto.getAttribute("alt"));
-    });
+  return card;
 
-    addCard(card, gallery);
+};
 
-  })
+// Добавление стартовых карточек
 
-}
-
-createCards(initialCards);
+initialCards.forEach(function(item) {
+  addCard(createCards(item), gallery);
+})
 
 // Функция добавления карточки
 
 function formSubmitPlace(event) {
   event.preventDefault();
 
-  const arr = [
-    {
+  const obj = {
     name: inputPlace.value,
     link: inputUrl.value,
-    },
-  ]
+    };
 
-  createCards(arr);
+
+
+  addCard(createCards(obj), gallery);
 
   closePopup(popupNewPlace);
 
