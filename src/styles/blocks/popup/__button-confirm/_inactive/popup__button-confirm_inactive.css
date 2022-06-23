@@ -1,0 +1,6 @@
+.popup__button-confirm_inactive {
+  background-color: #fff;
+  color: rgba(0, 0, 0, .2);
+  cursor: default;
+  border: rgba(0, 0, 0, .2) 1px solid;
+}

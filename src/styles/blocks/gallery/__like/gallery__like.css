@@ -1,0 +1,13 @@
+.gallery__like {
+  margin-left: auto;
+  width: 22px;
+  background: url(../../../../images/like.svg) center/contain no-repeat;
+  border: 0;
+  padding: 0;
+  transition: .3s;
+}
+
+.gallery__like:hover {
+  opacity: .5;
+  cursor: pointer;
+}
