@@ -15,14 +15,14 @@ const gallery = document.querySelector(".gallery");
 const buttonConfirmPlace = formNewPlace.querySelector(".popup__button-confirm");
 const buttonConfirmProfile = popupEditProfile.querySelector(".popup__button-confirm");
 
-export function placeInputValue() {
+export function fillProfileInputs() {
   inputName.value = profileName.textContent;
   inputAbout.value = profileAbout.textContent;
 }
 
 // Функция изменения профиля
 
-export function formSubmitProfile(event) {
+export function handleProfileSubmit(event) {
   event.preventDefault();
   profileName.textContent = inputName.value;
   profileAbout.textContent = inputAbout.value;
@@ -32,7 +32,7 @@ export function formSubmitProfile(event) {
 
 // Функция добавления карточки
 
-export function formSubmitPlace(event) {
+export function handlePlaceSubmit(event) {
   event.preventDefault();
 
   const obj = {

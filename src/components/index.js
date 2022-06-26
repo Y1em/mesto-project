@@ -2,8 +2,8 @@ import '../styles/index.css';
 
 import { initialCards, popupPhoto, createCards, addCard } from './card.js';
 import { openPopup, closePopup, closePopupByDevice } from './utils.js';
-import { gallery, formNewPlace, popupNewPlace, popupEditProfile, placeInputValue, formSubmitProfile, formSubmitPlace } from './modal.js';
-import { hideInputError } from './validation';
+import { gallery, formNewPlace, popupNewPlace, popupEditProfile, fillProfileInputs, handlePlaceSubmit, handleProfileSubmit } from './modal.js';
+import { validationConfig, hideInputError } from './validation';
 
 const editButton = document.querySelector(".profile__button-edit");
 const closeButtonEditProfile = document.querySelector(".popup__button-close_place_edit-profile");
@@ -15,7 +15,7 @@ const formEditProfile = document.querySelector(".popup__form_place_edit-profile"
 function hideErrorAfterClose () {
   const inputList = Array.from(formEditProfile.querySelectorAll('.popup__input'));
   inputList.forEach((inputElement) => {
-    hideInputError(formEditProfile, inputElement);
+    hideInputError(formEditProfile, inputElement, validationConfig.inputErrorClass);
   });
 };
 
@@ -27,7 +27,7 @@ initialCards.forEach(function(item) {
 
 // Обработчики
 
-formNewPlace.addEventListener("submit", formSubmitPlace);
+formNewPlace.addEventListener("submit", handlePlaceSubmit);
 
 addButton.addEventListener("click", function () {
   openPopup(popupNewPlace);
@@ -39,12 +39,12 @@ closeButtonNewPlace.addEventListener("click", function () {
 });
 
 editButton.addEventListener("click", function () {
-  placeInputValue();
+  hideErrorAfterClose();
+  fillProfileInputs();
   openPopup(popupEditProfile);
 });
 
 closeButtonEditProfile.addEventListener("click", function () {
-  hideErrorAfterClose();
   closePopup(popupEditProfile);
 });
 
@@ -52,21 +52,7 @@ closeButtonPhoto.addEventListener("click", function () {
   closePopup(popupPhoto);
 });
 
-formEditProfile.addEventListener("submit", formSubmitProfile);
-
-document.addEventListener('keydown', function (evt) {
-  if (evt.key === 'Escape') {
-    closePopupByDevice();
-    hideErrorAfterClose();
-  }
-});
-
-document.addEventListener('click', function (evt) {
-  if (evt.target.classList.contains('popup') || evt.target.classList.contains('popup__container')) {
-    closePopupByDevice();
-    hideErrorAfterClose();
-  }
-});
+formEditProfile.addEventListener("submit", handleProfileSubmit);
 
 
 
