@@ -23,7 +23,7 @@ export function openPopup(popup) {
 export function closePopup(popup) {
   popup.classList.remove("popup_opened");
   document.removeEventListener('keydown', closeByEscape);
-  document.addEventListener('mousedown', closeByOverlay);
+  document.removeEventListener('mousedown', closeByOverlay);
 };
 
 export function closePopupByDevice() {
