@@ -1,6 +1,7 @@
 .gallery__like {
   margin-left: auto;
   width: 22px;
+  aspect-ratio: 1/1;
   background: url(../../../../images/like.svg) center/contain no-repeat;
   border: 0;
   padding: 0;

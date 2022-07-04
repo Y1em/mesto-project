@@ -15,21 +15,21 @@
 
       <main class="content">
         <section class="profile">
+          <div class="profile__avatar-overlay"></div>
           <img
-            class="profile__image"
-            src="<%=require('./images/Avatar.jpg')%>"
-            alt="Фото профиля."
+          class="profile__image"
+          src=""
+          alt="Фото профиля."
           />
-
           <div class="profile__description">
-            <p class="profile__name">Жак-Ив Кусто</p>
+            <p class="profile__name"></p>
             <button
               type="button"
               class="profile__button-edit"
               aria-label="edit profile"
               title="Редактировать профиль"
             ></button>
-            <p class="profile__about">Исследователь океана</p>
+            <p class="profile__about"></p>
           </div>
 
           <button
@@ -57,12 +57,15 @@
               />
               <div class="gallery__card-bottom">
                 <h3 class="gallery__subtitle"></h3>
-                <button
+                <div class="gallery__like-container">
+                  <button
                   type="button"
                   class="gallery__like"
                   aria-label="like"
                   title="Нравится"
-                ></button>
+                  ></button>
+                  <p class="gallery__like-counter"></p>
+                </div>
               </div>
             </div>
           </template>
@@ -151,7 +154,7 @@
           aria-label="confirm"
           title="Сохранить"
         >
-          Создать
+          Сохранить
         </button>
       </form>
       </div>
@@ -178,6 +181,39 @@
 
       </div>
     </section>
+
+    <!-- Редактировать фото -->
+
+    <section class="popup popup_place_edit-avatar">
+      <div class="popup__container">
+        <button
+        class="popup__button-close popup__button-close_place_edit-avatar"
+        type="button"
+        aria-label="close"
+        title="Закрыть"
+      ></button>
+      <form class="popup__form popup__form_place_edit-avatar" name="edit avatar" novalidate>
+        <h3 class="popup__title">Обновить аватар</h3>
+        <input
+          class="popup__input popup__input_el_avatar"
+          placeholder="Ссылка на изображение"
+          required
+          type="url"
+          id="avatar-input"
+        />
+        <span class="popup__input-error avatar-input-error"></span>
+        <button
+          type="confirm"
+          class="popup__button-confirm"
+          aria-label="confirm"
+          title="Сохранить"
+        >
+        Сохранить
+        </button>
+      </form>
+      </div>
+    </section>
+
   </body>
 </html>
 

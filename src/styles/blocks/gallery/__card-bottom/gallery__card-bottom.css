@@ -1,6 +1,6 @@
 .gallery__card-bottom {
   width: 100%;
-  padding: 22px 20px 28px;  /*значение отступа не совпадает с фигмой в угоду перфект пикселя*/
+  padding: 19px 20px 23px;  /*значение отступа не совпадает с фигмой в угоду перфект пикселя*/
   box-sizing: border-box;
   display: flex;
 
