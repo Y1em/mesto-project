@@ -39,15 +39,15 @@ const checkInputValidity = (formElement, inputElement, config) => {
 };
 
 export function disableButton(buttonElement, inactiveButtonClass) {
-  buttonElement.classList.add(validationConfig.inactiveButtonClass);
+  buttonElement.classList.add(inactiveButtonClass);
   buttonElement.setAttribute("disabled", true);
 }
 
 function toggleButtonState(inputList, buttonElement, inactiveButtonClass) {
   if (hasInvalidInput(inputList)) {
-    disableButton(buttonElement);
+    disableButton(buttonElement, inactiveButtonClass);
   } else {
-    buttonElement.classList.remove(validationConfig.inactiveButtonClass);
+    buttonElement.classList.remove(inactiveButtonClass);
     buttonElement.removeAttribute("disabled");
   }
 }

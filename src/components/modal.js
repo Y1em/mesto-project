@@ -1,7 +1,7 @@
 import { closePopup } from "./utils.js";
 import { addOneCard, createCards } from "./card.js";
 import { disableButton } from "./validation.js";
-import { addCardServ, getProfileInfo, editProfile, editAvatar } from "./api.js";
+import { addCardServ, editProfile, editAvatar } from "./api.js";
 
 const inputName = document.querySelector(".popup__input_el_name");
 const inputAbout = document.querySelector(".popup__input_el_about");
@@ -15,6 +15,7 @@ const popupEditAvatar = document.querySelector(".popup_place_edit-avatar");
 const inputPlace = document.querySelector(".popup__input_el_place");
 const inputUrl = document.querySelector(".popup__input_el_url");
 const formNewPlace = document.querySelector(".popup__form_place_new-place");
+const formEditAvatar = document.querySelector(".popup__form_place_edit-avatar");
 const gallery = document.querySelector(".gallery");
 const buttonConfirmPlace = formNewPlace.querySelector(".popup__button-confirm");
 const buttonConfirmAvatar = popupEditAvatar.querySelector(
@@ -23,14 +24,6 @@ const buttonConfirmAvatar = popupEditAvatar.querySelector(
 const buttonConfirmProfile = popupEditProfile.querySelector(
   ".popup__button-confirm"
 );
-
-getProfileInfo()
-  .then((user) => {
-    profileName.textContent = user.name;
-    profileAbout.textContent = user.about;
-    profileAvatar.setAttribute("src", user.avatar);
-  })
-  .catch((err) => console.log(err));
 
 export function fillProfileInputs() {
   inputName.value = profileName.textContent;
@@ -49,13 +42,13 @@ export function handleProfileSubmit(e) {
     .then(() => {
       profileName.textContent = user.name;
       profileAbout.textContent = user.about;
+      closePopup(popupEditProfile);
+      disableButton(buttonConfirmProfile);
     })
     .catch((err) => console.log(err))
     .finally(() => {
       renderLoading(e, false);
-      disableButton(buttonConfirmProfile);
     });
-  closePopup(popupEditProfile);
 }
 
 // Функция добавления карточки
@@ -69,16 +62,14 @@ export function handlePlaceSubmit(e) {
   addCardServ(obj)
     .then((card) => {
       addOneCard(createCards(card), gallery);
+      closePopup(popupNewPlace);
+      disableButton(buttonConfirmPlace);
+      formNewPlace.reset();
     })
     .catch((err) => console.log(err))
     .finally(() => {
       renderLoading(e, false);
-      disableButton(buttonConfirmPlace);
     });
-
-  closePopup(popupNewPlace);
-
-  formNewPlace.reset();
 }
 
 // Функция изменения аватара
@@ -91,14 +82,14 @@ export function handleAvatarSubmit(e) {
   editAvatar(user)
     .then(() => {
       profileAvatar.setAttribute("src", user.avatar);
+      closePopup(popupEditAvatar);
+      disableButton(buttonConfirmAvatar);
+      formEditAvatar.reset();
     })
     .catch((err) => console.log(err))
     .finally(() => {
       renderLoading(e, false);
-      disableButton(buttonConfirmAvatar);
     });
-
-  closePopup(popupEditAvatar);
 }
 
 export function renderLoading(event, isLoading) {
@@ -122,4 +113,7 @@ export {
   popupEditProfile,
   popupEditAvatar,
   gallery,
+  profileName,
+  profileAbout,
+  profileAvatar,
 };

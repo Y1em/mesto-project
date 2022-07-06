@@ -1,5 +1,6 @@
 import { addLike, deleteCardServ, removeLike } from "./api.js";
 import { openPopup } from "./utils.js";
+import { profileId } from "./index.js";
 
 const popupPhoto = document.querySelector(".popup_place_photo");
 const cardTemplate = document.querySelector(".gallery__template").content;
@@ -19,14 +20,14 @@ export function createCards(obj) {
   cardSubtitle.textContent = obj.name;
   likeCounter.textContent = obj.likes.length;
 
-  if (obj.owner._id !== "22568a32946f152993e548aa") {
+  if (obj.owner._id !== profileId) {
     card
       .querySelector(".gallery__delete")
       .classList.add("gallery__delete_inactive");
   }
 
   obj.likes.forEach((like) => {
-    if (like._id === "22568a32946f152993e548aa") {
+    if (like._id === profileId) {
       card
         .querySelector(".gallery__like")
         .classList.add("gallery__like_active");

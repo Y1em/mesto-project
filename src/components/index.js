@@ -13,9 +13,14 @@ import {
   handleProfileSubmit,
   handleAvatarSubmit,
   renderLoading,
+  profileName,
+  profileAbout,
+  profileAvatar,
 } from "./modal.js";
 import { validationConfig, hideInputError } from "./validation";
-import { getCards } from "./api";
+import { getCards, getProfileInfo } from "./api";
+
+export let profileId = "";
 
 const editButton = document.querySelector(".profile__button-edit");
 const closeButtonEditProfile = document.querySelector(
@@ -52,13 +57,21 @@ function hideErrorAfterClose() {
 
 // Добавление стартовых карточек
 
-getCards()
-  .then((cards) => {
-    cards.forEach(function (card) {
-      addInitialCards(createCards(card), gallery);
-    });
-  })
-  .catch((err) => console.log(err));
+Promise.all([getProfileInfo(), getCards()]).then(([user, cards]) => {
+  getProfileInfo().then((user) => {
+    profileName.textContent = user.name;
+    profileAbout.textContent = user.about;
+    profileAvatar.setAttribute("src", user.avatar);
+    profileId = user._id;
+  });
+  getCards()
+    .then((cards) => {
+      cards.forEach(function (card) {
+        addInitialCards(createCards(card), gallery);
+      });
+    })
+    .catch((err) => console.log(err));
+});
 
 // Обработчики
 
