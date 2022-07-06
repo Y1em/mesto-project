@@ -1,6 +1,6 @@
 import { closePopup } from "./utils.js";
 import { addOneCard, createCards } from "./card.js";
-import { disableButton } from "./validation.js";
+import { disableButton, validationConfig } from "./validation.js";
 import { addCardServ, editProfile, editAvatar } from "./api.js";
 
 const inputName = document.querySelector(".popup__input_el_name");
@@ -43,7 +43,7 @@ export function handleProfileSubmit(e) {
       profileName.textContent = user.name;
       profileAbout.textContent = user.about;
       closePopup(popupEditProfile);
-      disableButton(buttonConfirmProfile);
+      disableButton(buttonConfirmProfile, validationConfig.inactiveButtonClass);
     })
     .catch((err) => console.log(err))
     .finally(() => {
@@ -63,7 +63,7 @@ export function handlePlaceSubmit(e) {
     .then((card) => {
       addOneCard(createCards(card), gallery);
       closePopup(popupNewPlace);
-      disableButton(buttonConfirmPlace);
+      disableButton(buttonConfirmPlace, validationConfig.inactiveButtonClass);
       formNewPlace.reset();
     })
     .catch((err) => console.log(err))
@@ -83,7 +83,7 @@ export function handleAvatarSubmit(e) {
     .then(() => {
       profileAvatar.setAttribute("src", user.avatar);
       closePopup(popupEditAvatar);
-      disableButton(buttonConfirmAvatar);
+      disableButton(buttonConfirmAvatar, validationConfig.inactiveButtonClass);
       formEditAvatar.reset();
     })
     .catch((err) => console.log(err))
