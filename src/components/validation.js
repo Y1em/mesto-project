@@ -6,6 +6,17 @@ export const validationConfig = {
   inputErrorClass: "popup__input_type_error",
 };
 
+class FormValidator {
+  constructor() {
+    this._formElement = formElement;
+  }
+  _showInputError(inputElement, inputErrorClass, errorMessage) {
+    this._errorElement = this._formElement.querySelector(`.${inputElement.id}-error`);
+    inputElement.classList.add(inputErrorClass);
+    this._errorElement.textContent = errorMessage;
+  }
+}
+
 const { inputSelector, ...rest } = validationConfig;
 
 const showInputError = (
@@ -14,9 +25,7 @@ const showInputError = (
   inputErrorClass,
   errorMessage
 ) => {
-  const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
-  inputElement.classList.add(inputErrorClass);
-  errorElement.textContent = errorMessage;
+  
 };
 
 export const hideInputError = (formElement, inputElement, inputErrorClass) => {
