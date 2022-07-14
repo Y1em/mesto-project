@@ -2,6 +2,27 @@ import { addLike, deleteCardServ, removeLike } from "./api.js";
 import { openPopup } from "./utils.js";
 import { profileId } from "./index.js";
 
+class Card {
+  constructor(name, link, profileId) {
+    this._name = data.name; // то, что берём с сервака
+    this._link = data.link;
+    this._profileId = profileId;
+    this._handleChangeLikeStatus = handleChangeLikeStatus;
+    this._handleDeleteCard = handleDeleteCard;
+  }
+  _getCardFromTemplate() {
+    const cardTemplate = document.querySelector(".gallery__template").content; // выносим метод клонирования
+    const card = cardTemplate.querySelector(".gallery__card").cloneNode(true);
+    return card;
+  }
+  _generateCard() {
+    this._card = this._getCardTemplate();
+    this._cardSubtitle.textContent = this._name;
+    this._cardPhoto.src = this._link;
+    this._cardPhoto.alt = this._name;
+  }
+}
+
 const popupPhoto = document.querySelector(".popup_place_photo");
 const cardTemplate = document.querySelector(".gallery__template").content;
 const popupSubtitle = document.querySelector(".popup__subtitle");
