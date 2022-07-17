@@ -1,7 +1,3 @@
-const popupList = Array.from(document.querySelectorAll(".popup"));
-
-const closeX = document.querySelector(".popup__button-close_place_edit-profile");
-
 function closeByEscape(evt) {
   if (evt.key === "Escape") {
     const openedPopup = document.querySelector(".popup_opened");
@@ -35,39 +31,5 @@ export function closePopupByDevice() {
   popupList.forEach(closePopup);
 }
 
-class Popup {
-  constructor(selector) {
-    this.selector = selector;
-  }
-
-  open() {
-    document
-    .querySelector(this.selector)
-    .classList.add("popup_opened");
-  }
-
-  close() {
-    document
-    .querySelector(this.selector)
-    .classList.remove("popup_opened");
-  }
-
-  getPopupEl() {
-    const popupEl = document.querySelector(this.selector);
-    return popupEl;
-  }
-
-  setEventListeners() {
-    closeX.addEventListener('click', () => {
-      console.log("123")
-      this.close();
-    });
-  }
-
-}
-
-const newPopup = new Popup(".popup_place_edit-profile");
-
-// newPopup.open();
 
 

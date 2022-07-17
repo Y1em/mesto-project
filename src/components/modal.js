@@ -3,28 +3,6 @@ import { addOneCard, createCards } from "./card.js";
 import { disableButton, validationConfig } from "./validation.js";
 // import { addCardServ, editProfile, editAvatar } from "./api.js";
 
-const inputName = document.querySelector(".popup__input_el_name");
-const inputAbout = document.querySelector(".popup__input_el_about");
-const inputAvatar = document.querySelector(".popup__input_el_avatar");
-const profileName = document.querySelector(".profile__name");
-const profileAbout = document.querySelector(".profile__about");
-const profileAvatar = document.querySelector(".profile__image");
-const popupEditProfile = document.querySelector(".popup_place_edit-profile");
-const popupNewPlace = document.querySelector(".popup_place_new-place");
-const popupEditAvatar = document.querySelector(".popup_place_edit-avatar");
-const inputPlace = document.querySelector(".popup__input_el_place");
-const inputUrl = document.querySelector(".popup__input_el_url");
-const formNewPlace = document.querySelector(".popup__form_place_new-place");
-const formEditAvatar = document.querySelector(".popup__form_place_edit-avatar");
-const gallery = document.querySelector(".gallery");
-const buttonConfirmPlace = formNewPlace.querySelector(".popup__button-confirm");
-const buttonConfirmAvatar = popupEditAvatar.querySelector(
-  ".popup__button-confirm"
-);
-const buttonConfirmProfile = popupEditProfile.querySelector(
-  ".popup__button-confirm"
-);
-
 export function fillProfileInputs() {
   inputName.value = profileName.textContent;
   inputAbout.value = profileAbout.textContent;
@@ -106,14 +84,3 @@ export function renderLoading(event, isLoading) {
     });
   }
 }
-
-export {
-  formNewPlace,
-  popupNewPlace,
-  popupEditProfile,
-  popupEditAvatar,
-  gallery,
-  profileName,
-  profileAbout,
-  profileAvatar,
-};

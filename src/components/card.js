@@ -1,6 +1,6 @@
 // import { addLike, deleteCardServ, removeLike } from "./api.js";
 import { openPopup } from "../utils/utils.js";
-import { profileId } from "../pages/index.js";
+import { profileId } from "../utils/constants.js";
 
 class Card {
   constructor(name, link, profileId) {
@@ -22,11 +22,6 @@ class Card {
     this._cardPhoto.alt = this._name;
   }
 }
-
-const popupPhoto = document.querySelector(".popup_place_photo");
-const cardTemplate = document.querySelector(".gallery__template").content;
-const popupSubtitle = document.querySelector(".popup__subtitle");
-const popupImage = document.querySelector(".popup__image");
 
 // Функция создания карточки
 
@@ -104,5 +99,3 @@ export function addOneCard(card, gallery) {
 export function addInitialCards(card, gallery) {
   gallery.append(card);
 }
-
-export { popupPhoto };

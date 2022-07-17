@@ -1,46 +1,41 @@
 import "../styles/index.css";
 
-import { popupPhoto, createCards, addInitialCards } from "../components/card.js";
-import { openPopup, closePopup } from "../utils/utils.js";
 import {
   gallery,
   formNewPlace,
   popupEditAvatar,
   popupNewPlace,
   popupEditProfile,
+  profileName,
+  profileAbout,
+  profileAvatar,
+  popupPhoto,
+  addButton,
+  closeButtonEditProfile,
+  closeButtonNewPlace,
+  editButton,
+  editAvatar,
+  closeButtonPhoto,
+  closeButtonEditAvatar,
+  formEditProfile,
+  formEditAvatar,
+
+} from "../utils/constants.js";
+import {
+  newPopup
+} from "../components/Popup.js"
+
+import { createCards, addInitialCards } from "../components/card.js";
+import { openPopup, closePopup } from "../utils/utils.js";
+import {
   fillProfileInputs,
   handlePlaceSubmit,
   handleProfileSubmit,
   handleAvatarSubmit,
   renderLoading,
-  profileName,
-  profileAbout,
-  profileAvatar,
 } from "../components/modal.js";
 import { validationConfig, hideInputError } from "../components/validation";
 // import { getCards, getProfileInfo } from "./api";
-
-export let profileId = "";
-
-const editButton = document.querySelector(".profile__button-edit");
-const closeButtonEditProfile = document.querySelector(
-  ".popup__button-close_place_edit-profile"
-);
-const closeButtonNewPlace = document.querySelector(
-  ".popup__button-close_place_new-place"
-);
-const closeButtonPhoto = document.querySelector(
-  ".popup__button-close_place_photo"
-);
-const closeButtonEditAvatar = document.querySelector(
-  ".popup__button-close_place_edit-avatar"
-);
-const addButton = document.querySelector(".profile__button-add");
-const formEditProfile = document.querySelector(
-  ".popup__form_place_edit-profile"
-);
-const formEditAvatar = document.querySelector(".popup__form_place_edit-avatar");
-const editAvatar = document.querySelector(".profile__avatar-overlay");
 
 function hideErrorAfterClose() {
   const inputList = Array.from(
@@ -55,9 +50,18 @@ function hideErrorAfterClose() {
   });
 }
 
+// Тест открыть-закрыть попап
+
+newPopup.open();
+
+setTimeout(() => {
+  newPopup.close();
+}, 3000);
+
+
 // Добавление стартовых карточек
 
-Promise.all([getProfileInfo(), getCards()]).then(([user, cards]) => {
+/* Promise.all([getProfileInfo(), getCards()]).then(([user, cards]) => {
   getProfileInfo().then((user) => {
     profileName.textContent = user.name;
     profileAbout.textContent = user.about;
@@ -71,7 +75,7 @@ Promise.all([getProfileInfo(), getCards()]).then(([user, cards]) => {
       });
     })
     .catch((err) => console.log(err));
-});
+}); */
 
 // Обработчики
 
@@ -122,3 +126,5 @@ formEditAvatar.addEventListener("submit", function (e) {
   renderLoading(e, true);
   handleAvatarSubmit(e);
 });
+
+
