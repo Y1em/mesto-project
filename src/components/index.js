@@ -99,9 +99,9 @@ editAvatar.addEventListener("click", function () {
   openPopup(popupEditAvatar);
 });
 
-closeButtonEditProfile.addEventListener("click", function () {
+/* closeButtonEditProfile.addEventListener("click", function () {
   closePopup(popupEditProfile);
-});
+}); */
 
 closeButtonPhoto.addEventListener("click", function () {
   closePopup(popupPhoto);
