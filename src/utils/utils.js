@@ -68,6 +68,6 @@ class Popup {
 
 const newPopup = new Popup(".popup_place_edit-profile");
 
-newPopup.open();
+// newPopup.open();
 
 

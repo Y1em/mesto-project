@@ -1,7 +1,7 @@
-import { closePopup } from "./utils.js";
+import { closePopup } from "../utils/utils.js";
 import { addOneCard, createCards } from "./card.js";
 import { disableButton, validationConfig } from "./validation.js";
-import { addCardServ, editProfile, editAvatar } from "./api.js";
+// import { addCardServ, editProfile, editAvatar } from "./api.js";
 
 const inputName = document.querySelector(".popup__input_el_name");
 const inputAbout = document.querySelector(".popup__input_el_about");

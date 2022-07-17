@@ -1,6 +1,6 @@
-import { addLike, deleteCardServ, removeLike } from "./api.js";
-import { openPopup } from "./utils.js";
-import { profileId } from "./index.js";
+// import { addLike, deleteCardServ, removeLike } from "./api.js";
+import { openPopup } from "../utils/utils.js";
+import { profileId } from "../pages/index.js";
 
 class Card {
   constructor(name, link, profileId) {

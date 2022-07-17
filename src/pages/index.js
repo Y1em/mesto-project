@@ -1,7 +1,7 @@
 import "../styles/index.css";
 
-import { popupPhoto, createCards, addInitialCards } from "./card.js";
-import { openPopup, closePopup } from "./utils.js";
+import { popupPhoto, createCards, addInitialCards } from "../components/card.js";
+import { openPopup, closePopup } from "../utils/utils.js";
 import {
   gallery,
   formNewPlace,
@@ -16,9 +16,9 @@ import {
   profileName,
   profileAbout,
   profileAvatar,
-} from "./modal.js";
-import { validationConfig, hideInputError } from "./validation";
-import { getCards, getProfileInfo } from "./api";
+} from "../components/modal.js";
+import { validationConfig, hideInputError } from "../components/validation";
+// import { getCards, getProfileInfo } from "./api";
 
 export let profileId = "";
 
