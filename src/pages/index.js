@@ -35,7 +35,7 @@ import {
   renderLoading,
 } from "../components/modal.js";
 import { validationConfig, hideInputError } from "../components/validation";
-// import { getCards, getProfileInfo } from "./api";
+import { api } from "../components/Api.js";
 
 function hideErrorAfterClose() {
   const inputList = Array.from(

@@ -1,12 +1,11 @@
-// import { addLike, deleteCardServ, removeLike } from "./api.js";
-import { openPopup } from "../utils/utils.js";
-import { profileId } from "../utils/constants.js";
+import { getCards, getProfileInfo, addLike, deleteCardServ, removeLike } from "./api.js";
+import { openPopup, handleDeleteCard, handleChangeLikeStatus } from "../utils/utils.js";
 
 class Card {
-  constructor(name, link, profileId) {
+  constructor({data, user}, handleDeleteCard, handleChangeLikeStatus) { // data - карточки с сервера, user - данные пользователя с сервера
     this._name = data.name; // то, что берём с сервака
     this._link = data.link;
-    this._profileId = profileId;
+    this._userId = user._id;
     this._handleChangeLikeStatus = handleChangeLikeStatus;
     this._handleDeleteCard = handleDeleteCard;
   }
@@ -15,11 +14,61 @@ class Card {
     const card = cardTemplate.querySelector(".gallery__card").cloneNode(true);
     return card;
   }
-  _generateCard() {
+  generateCard() {
     this._card = this._getCardTemplate();
     this._cardSubtitle.textContent = this._name;
     this._cardPhoto.src = this._link;
     this._cardPhoto.alt = this._name;
+    this._cardPhoto = this._card.querySelector(".gallery__photo");
+    this._deleteButton = this._card.querySelector(".gallery__delete");
+    this._likeButton = this._card.querySelector(".gallery__like");
+    this._likeCounter = this._card.querySelector(".gallery__like-counter");
+
+    return this._card;
+  }
+  showDeleteIcon() {
+    if (obj.owner._id !== profileId) {
+      card
+        .querySelector(".gallery__delete")
+        .classList.add("gallery__delete_inactive");
+    }
+  
+    obj.likes.forEach((like) => {
+      if (like._id === profileId) {
+        card
+          .querySelector(".gallery__like")
+          .classList.add("gallery__like_active");
+      }
+    });
+  }
+  _setEventListeners() {
+    this._cardPhoto.addEventListener('click', () => openPopup(popupPhoto)); // не забыть переделать
+
+    this._deleteButton.addEventListener('click', () => function (event) { // не забыть взять функцию из своего проекта и воткнуть вызов сюда, при этом саму функцию перенести в utils
+      deleteCardServ(obj._id)
+        .then(() => {
+          event.target.closest(".gallery__card").remove();
+        })
+        .catch((err) => console.log(err));
+    });
+
+    this._likeButton.addEventListener('click', () => function (event) {
+      if (event.target.classList.contains("gallery__like_active")) {
+        removeLike(obj._id)
+          .then((obj) => {
+            event.target.classList.remove("gallery__like_active");
+            likeCounter.textContent = obj.likes.length;
+          })
+          .catch((err) => console.log(err));
+      } else {
+        addLike(obj._id)
+          .then((obj) => {
+            event.target.classList.add("gallery__like_active");
+            likeCounter.textContent = obj.likes.length;
+          })
+          .catch((err) => console.log(err));
+      }
+    });
   }
 }
 

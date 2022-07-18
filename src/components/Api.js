@@ -39,7 +39,6 @@ class Api {
   getProfileInfo() {
     return fetch(`${config.baseUrl}/users/me`, {
       method: "GET",
-  
       headers: config.headers,
     }).then(checkResponse);
   }
