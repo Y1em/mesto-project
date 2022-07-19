@@ -68,6 +68,13 @@ class Api {
     }).then(checkResponse);
   }
 
+  changeLikeStatus(cardId, isLike) {
+    return fetch(`${config.baseUrl}/cards/likes/${cardId}`, {
+      method: isLike ? "DELETE" : "PUT",
+      headers: config.headers,
+    }).then(checkResponse);
+  }
+
   editAvatar(data) {
     return fetch(`${config.baseUrl}/users/me/avatar`, {
       method: "PATCH",
