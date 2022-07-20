@@ -55,3 +55,13 @@ export const popupPhoto = document.querySelector(".popup_place_photo");
 export const cardTemplate = document.querySelector(".gallery__template").content;
 export const popupSubtitle = document.querySelector(".popup__subtitle");
 export const popupImage = document.querySelector(".popup__image");
+
+// from validation.js
+
+export const validationConfig = {
+  formSelector: ".popup__form",
+  inputSelector: ".popup__input",
+  submitButtonSelector: ".popup__button-confirm",
+  inactiveButtonClass: "popup__button-confirm_inactive",
+  inputErrorClass: "popup__input_type_error",
+};

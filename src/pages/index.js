@@ -25,7 +25,6 @@ import {
   newPopup
 } from "../components/Popup.js"
 
-import { createCards, addInitialCards } from "../components/card.js";
 import { openPopup, closePopup } from "../utils/utils.js";
 import {
   fillProfileInputs,
@@ -34,21 +33,9 @@ import {
   handleAvatarSubmit,
   renderLoading,
 } from "../components/modal.js";
-import { validationConfig, hideInputError } from "../components/validation";
-import { api } from "../components/Api.js";
-
-function hideErrorAfterClose() {
-  const inputList = Array.from(
-    formEditProfile.querySelectorAll(".popup__input")
-  );
-  inputList.forEach((inputElement) => {
-    hideInputError(
-      formEditProfile,
-      inputElement,
-      validationConfig.inputErrorClass
-    );
-  });
-}
+import { api } from "../components/Api.js"; // теперь можно доставать методы изнутри api.getCards()
+import { card } from "../components/Card.js";
+import { FormValidator } from "../components/FormValidator.js";
 
 // Тест открыть-закрыть попап
 
@@ -58,24 +45,16 @@ setTimeout(() => {
   newPopup.close();
 }, 3000);
 
-
-// Добавление стартовых карточек
-
-/* Promise.all([getProfileInfo(), getCards()]).then(([user, cards]) => {
-  getProfileInfo().then((user) => {
-    profileName.textContent = user.name;
-    profileAbout.textContent = user.about;
-    profileAvatar.setAttribute("src", user.avatar);
-    profileId = user._id;
-  });
-  getCards()
-    .then((cards) => {
-      cards.forEach(function (card) {
-        addInitialCards(createCards(card), gallery);
-      });
-    })
-    .catch((err) => console.log(err));
-}); */
+const userInfo = new UserInfo({profileName, profileAbout, profileAvatar, profileId}); // должен быть в index.js, т.к. обращается к constants.js, а импорты разрешены только здесь
+const card = new Card({data, user}, handleDeleteCard, handleChangeLikeStatus); // навешать аргументов
+// Добавление стартовых карточек и пользователя
+const promises = [api.getProfileInfo(), api.getCards()]; // вытаскиваем промисы отдельно, чтоб избежать длинной строки аргументов
+Promise.all(promises)
+  .then(([user, cards]) => {
+    userInfo.setUserInfo(user); // получаем данные с сервера ОБЪЕКТОМ и вставляем в разметку
+    card.renderCardsFromSrv(); // c карточками надо чото с рендером делать
+  })
+  .catch((err) => console.log(err));
 
 // Обработчики
 
@@ -127,4 +106,6 @@ formEditAvatar.addEventListener("submit", function (e) {
   handleAvatarSubmit(e);
 });
 
-
+const profileValidator = new FormValidator(validationConfig, formEditProfile);
+const profileValidator = new FormValidator(validationConfig, formEditAvatar);
+const cardValidator = new FormValidator(validationConfig, formNewPlace);

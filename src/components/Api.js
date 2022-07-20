@@ -1,8 +1,14 @@
 class Api {
   constructor(options) {
-    // тело конструктора
+    this._config = {
+      url: 'https://mesto.nomoreparties.co/v1/plus-cohort-13',
+      headers: {
+        authorization: 'eeb10f4c-568d-4124-bc82-28113d2b839d',
+        'Content-Type': 'application/json',
+      },
+    };
   }
-
+  
   checkResponse(res) {
     if (res.ok) {
       return res.json();
@@ -12,16 +18,16 @@ class Api {
   }
 
   getCards() {
-    return fetch(`${config.baseUrl}/cards`, {
+    return fetch(`${this._config.baseUrl}/cards`, {
       method: "GET",
-      headers: config.headers,
+      headers: this._config.headers,
     }).then(checkResponse);
   }
 
   addCardServ(data) {
-    return fetch(`${config.baseUrl}/cards`, {
+    return fetch(`${this._config.baseUrl}/cards`, {
       method: "POST",
-      headers: config.headers,
+      headers: this._config.headers,
       body: JSON.stringify({
         name: data.name,
         link: data.link,
@@ -30,23 +36,23 @@ class Api {
   }
 
   deleteCardServ(cardId) {
-    return fetch(`${config.baseUrl}/cards/${cardId}`, {
+    return fetch(`${this._config.baseUrl}/cards/${cardId}`, {
       method: "DELETE",
-      headers: config.headers,
+      headers: this._config.headers,
     }).then(checkResponse);
   }
 
   getProfileInfo() {
-    return fetch(`${config.baseUrl}/users/me`, {
+    return fetch(`${this._config.baseUrl}/users/me`, {
       method: "GET",
-      headers: config.headers,
+      headers: this._config.headers,
     }).then(checkResponse);
   }
 
   editProfile(data) {
-    return fetch(`${config.baseUrl}/users/me`, {
+    return fetch(`${this._config.baseUrl}/users/me`, {
       method: "PATCH",
-      headers: config.headers,
+      headers: this._config.headers,
       body: JSON.stringify({
         name: data.name,
         about: data.about,
@@ -55,30 +61,30 @@ class Api {
   }
 
   addLike(cardId) {
-    return fetch(`${config.baseUrl}/cards/likes/${cardId}`, {
+    return fetch(`${this._config.baseUrl}/cards/likes/${cardId}`, {
       method: "PUT",
-      headers: config.headers,
+      headers: this._config.headers,
     }).then(checkResponse);
   }
 
   removeLike(cardId) {
-    return fetch(`${config.baseUrl}/cards/likes/${cardId}`, {
+    return fetch(`${this._config.baseUrl}/cards/likes/${cardId}`, {
       method: "DELETE",
-      headers: config.headers,
+      headers: this._config.headers,
     }).then(checkResponse);
   }
 
   changeLikeStatus(cardId, isLike) {
-    return fetch(`${config.baseUrl}/cards/likes/${cardId}`, {
+    return fetch(`${this._config.baseUrl}/cards/likes/${cardId}`, {
       method: isLike ? "DELETE" : "PUT",
-      headers: config.headers,
+      headers: this._config.headers,
     }).then(checkResponse);
   }
 
   editAvatar(data) {
-    return fetch(`${config.baseUrl}/users/me/avatar`, {
+    return fetch(`${this._config.baseUrl}/users/me/avatar`, {
       method: "PATCH",
-      headers: config.headers,
+      headers: this._config.headers,
       body: JSON.stringify({
         avatar: data.avatar,
       }),
@@ -86,10 +92,4 @@ class Api {
   }
 }
 
-export const api = new Api({
-  baseUrl: 'https://nomoreparties.co/v1/plus-cohort-13',
-  headers: {
-    authorization: 'dc40e991-7393-4c7a-83ae-1391b0c1505f',
-    'Content-Type': 'application/json'
-  }
-});
+export const api = new Api();

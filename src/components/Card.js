@@ -1,7 +1,4 @@
-import { getCards, getProfileInfo, addLike, deleteCardServ, removeLike } from "./api.js";
-import { openPopup, handleDeleteCard, handleChangeLikeStatus } from "../utils/utils.js";
-
-class Card {
+export default class Card {
   constructor({data, user}, handleDeleteCard, handleChangeLikeStatus) {
     this._data = data; // Надо передать карточку с сервера
     this._user = user; // Передать юзера как целый объект
