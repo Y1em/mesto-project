@@ -35,7 +35,7 @@ import {
 } from "../components/modal.js";
 import { api } from "../components/Api.js"; // теперь можно доставать методы изнутри api.getCards()
 import { card } from "../components/Card.js";
-import { FormValidator } from "../components/FormValidator.js";
+import FormValidator from "../components/FormValidator.js";
 
 // Тест открыть-закрыть попап
 
