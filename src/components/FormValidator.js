@@ -15,7 +15,7 @@ export default class FormValidator {
   }
   _checkInputValidity(inputElement) {
     if (!inputElement.validity.valid) {
-      this._showInputError(inputElement.validationMessage);
+      this._showInputError(inputElement, inputElement.validationMessage);
     } else {
       this._hideInputError(inputElement);
     }
@@ -52,13 +52,10 @@ export default class FormValidator {
     });
   }
   enableValidation() {
-    this._formList = Array.from(document.querySelectorAll(this._validationConfig.formSelector));
-    this._formList.forEach((formEl) => {
       this._formElement.addEventListener("submit", (evt) => {
         evt.preventDefault();
       });
       this._setEventListeners();
-    });
   }
   hideErrorAfterClose() { // этот будем вызывать для каждого попапа отдельно
     this._inputList.forEach((inputElement) => {

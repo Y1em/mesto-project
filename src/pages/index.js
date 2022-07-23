@@ -83,25 +83,11 @@ editAvatar.addEventListener("click", function () {
 export const popupOpenImage = new PopupWithImage(".popup_place_photo");
 popupOpenImage.setEventListeners();
 
-//test
+// Валидация
 
-/* document.querySelector('.gallery__photo').addEventListener('click', (evt) => {
-  popupOpenImage.open({ name: evt.target.alt, link: evt.target.src });
-}) */
-
-
-/* formEditProfile.addEventListener("submit", function (e) {
-  e.preventDefault();
-  renderLoading(e, true);
-  handleProfileSubmit(e);
-});
-
-formEditAvatar.addEventListener("submit", function (e) {
-  e.preventDefault();
-  renderLoading(e, true);
-  handleAvatarSubmit(e);
-}); */
-
-const profileValidator = new FormValidator(validationConfig, popupEditProfile.forms);
+const profileValidator = new FormValidator(validationConfig, formEditProfile);
+profileValidator.enableValidation();
 const avatarValidator = new FormValidator(validationConfig, formEditAvatar);
+avatarValidator.enableValidation();
 const cardValidator = new FormValidator(validationConfig, formNewPlace);
+cardValidator.enableValidation();
