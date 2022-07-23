@@ -3,10 +3,7 @@
 //import { disableButton, validationConfig } from "./validation.js";
 // import { addCardServ, editProfile, editAvatar } from "./api.js";
 
-export function fillProfileInputs() {
-  inputName.value = profileName.textContent;
-  inputAbout.value = profileAbout.textContent;
-}
+
 
 // Функция изменения профиля
 

@@ -28,6 +28,10 @@ export const popupList = Array.from(document.querySelectorAll(".popup"));
 
 // from modal.js
 
+export const nameSelector = ".profile__name";
+export const aboutSelector = ".profile__about";
+export const avatarSelector = ".profile__image";
+
 export const inputName = document.querySelector(".popup__input_el_name");
 export const inputAbout = document.querySelector(".popup__input_el_about");
 export const inputAvatar = document.querySelector(".popup__input_el_avatar");

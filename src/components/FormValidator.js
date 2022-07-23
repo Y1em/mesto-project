@@ -2,6 +2,7 @@ export default class FormValidator {
   constructor(validationConfig, formElement) { // конфиг теперь берем из constants.js, чтобы этот файл больше никогда не трогатью Там же и будут разные валидаторы для всех форм
     this._validationConfig = validationConfig;
     this._formElement = formElement;
+    this._inputList = Array.from(this._formElement.querySelectorAll(this._validationConfig.inputSelector));
   }
   _showInputError(inputElement, errorMessage) {
     this._errorElement = this._formElement.querySelector(`.${inputElement.id}-error`);
@@ -41,7 +42,7 @@ export default class FormValidator {
     }
   }
   _setEventListeners() {
-    this._inputList = Array.from(this._formElement.querySelectorAll(this._validationConfig.inputSelector));
+
     this._buttonElement = this._formElement.querySelector(this._validationConfig.submitButtonSelector);
     this._toggleButtonState();
     this._inputList.forEach((inputElement) => {
@@ -58,8 +59,9 @@ export default class FormValidator {
       this._setEventListeners();
   }
   hideErrorAfterClose() { // этот будем вызывать для каждого попапа отдельно
+
     this._inputList.forEach((inputElement) => {
-      _hideInputError(inputElement);
+      this._hideInputError(inputElement);
     });
   }
 }

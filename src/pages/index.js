@@ -1,6 +1,9 @@
 import "../styles/index.css";
 
 import {
+  nameSelector,
+  aboutSelector,
+  avatarSelector,
   gallery,
   formNewPlace,
   popupNewPlace,
@@ -17,14 +20,15 @@ import {
   validationConfig,
   popupImage,
 
+
 } from "../utils/constants.js";
 
 import { Popup } from "../components/Popup.js"
 import { PopupWithImage } from "../components/PopupWithImage.js"
 
-import {  } from "../utils/utils.js";
+import { fillProfileInputs, } from "../utils/utils.js";
 import {
-  fillProfileInputs,
+
   handlePlaceSubmit,
   handleProfileSubmit,
   handleAvatarSubmit,
@@ -36,7 +40,7 @@ import FormValidator from "../components/FormValidator.js";
 import UserInfo from "../components/UserInfo.js";
 import { PopupWithForm } from "../components/PopupWithForm";
 
-const userInfo = new UserInfo({profileName, profileAbout, profileAvatar, profileId}); // должен быть в index.js, т.к. обращается к constants.js, а импорты разрешены только здесь
+const userInfo = new UserInfo({nameSelector, aboutSelector, avatarSelector}); // должен быть в index.js, т.к. обращается к constants.js, а импорты разрешены только здесь
 // Я убрал const card = new Card({data, user}, handleDeleteCard, handleChangeLikeStatus); // навешать аргументов
 // Добавление стартовых карточек и пользователя
 
@@ -51,10 +55,11 @@ Promise.all(promises)
 
 // Попап добававить карточку
 
-const popupAddCard = new PopupWithForm('.popup_place_new-place', api.deleteCardServ);
+const popupAddCard = new PopupWithForm('.popup_place_new-place', api.addCardServ);
 popupAddCard.setEventListeners();
 
 addButton.addEventListener("click", function () {
+  cardValidator.hideErrorAfterClose();
   popupAddCard.open();
 });
 
@@ -64,18 +69,18 @@ const popupEditProfile = new PopupWithForm(".popup_place_edit-profile", api.edit
 popupEditProfile.setEventListeners();
 
 editButton.addEventListener("click", function () {
-  //hideErrorAfterClose();
-  //fillProfileInputs();
+  fillProfileInputs(userInfo.getUserInfo());
   popupEditProfile.open();
+
 });
 
 // Попап редактировать аватар
 
 const popupEditAvatar = new PopupWithForm(".popup_place_edit-avatar", api.editAvatar);
 popupEditAvatar.setEventListeners();
-
 editAvatar.addEventListener("click", function () {
-  popupEditAvatar.open()
+  avatarValidator.hideErrorAfterClose();
+  popupEditAvatar.open();
 });
 
 // Попап открыть картинку

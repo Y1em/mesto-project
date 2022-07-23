@@ -1,3 +1,5 @@
+import { inputName, inputAbout } from "./constants.js";
+
 /* function closeByEscape(evt) {
   if (evt.key === "Escape") {
     const openedPopup = document.querySelector(".popup_opened");
@@ -70,4 +72,9 @@ export function renderLoading(event, isLoading) {
       button.textContent = "Сохранить";
     });
   }
+}
+
+export function fillProfileInputs(dataUser) {
+  inputName.value = dataUser.name;
+  inputAbout.value = dataUser.about;
 }
