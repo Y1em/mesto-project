@@ -1,6 +1,6 @@
-import { closePopup } from "../utils/utils.js";
-import { addOneCard, createCards } from "./card.js";
-import { disableButton, validationConfig } from "./validation.js";
+//import { closePopup } from "../utils/utils.js";
+//import { addOneCard, createCards } from "./card.js";
+//import { disableButton, validationConfig } from "./validation.js";
 // import { addCardServ, editProfile, editAvatar } from "./api.js";
 
 export function fillProfileInputs() {

@@ -1,32 +1,33 @@
-class Popup {
-  constructor(selector) {
-    this.selector = selector;
+export class Popup {
+  constructor(popupSelector) {
+    this._popup = document.querySelector(popupSelector);
+  }
+
+  _handleEscClose = (evt) => {
+    if (evt.key === 'Escape') {
+      this.close();
+    }
   }
 
   open() {
-    document
-    .querySelector(this.selector)
-    .classList.add("popup_opened");
+    this._popup.classList.add('popup_opened');
+    document.addEventListener('keydown', this._handleEscClose);
   }
 
   close() {
-    document
-    .querySelector(this.selector)
-    .classList.remove("popup_opened");
+    this._popup.classList.remove('popup_opened');
+    document.removeEventListener('keydown', this._handleEscClose);
   }
 
-  getPopupEl() {
-    const popupEl = document.querySelector(this.selector);
-    return popupEl;
-  }
-
-  /* setEventListeners() {
-    closeX.addEventListener('click', () => {
-      console.log("123")
-      this.close();
+  setEventListeners() {
+    this._popup.addEventListener('mousedown', (evt) => {
+      if (evt.target.classList.contains('popup__button-close') ||
+          evt.target.classList.contains('popup') ||
+          evt.target.classList.contains('popup__container')) {
+            this.close();
+      }
     });
-  } */
-
+  }
 }
 
-export const newPopup = new Popup(".popup_place_edit-profile");
+

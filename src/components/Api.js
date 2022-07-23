@@ -8,7 +8,7 @@ class Api {
       },
     };
   }
-  
+
   checkResponse(res) {
     if (res.ok) {
       return res.json();
@@ -18,77 +18,77 @@ class Api {
   }
 
   getCards() {
-    return fetch(`${this._config.baseUrl}/cards`, {
+    return fetch(`${this._config.url}/cards`, {
       method: "GET",
       headers: this._config.headers,
-    }).then(checkResponse);
+    }).then(this.checkResponse);
   }
 
   addCardServ(data) {
-    return fetch(`${this._config.baseUrl}/cards`, {
+    return fetch(`${this._config.url}/cards`, {
       method: "POST",
       headers: this._config.headers,
       body: JSON.stringify({
         name: data.name,
         link: data.link,
       }),
-    }).then(checkResponse);
+    }).then(this.checkResponse);
   }
 
   deleteCardServ(cardId) {
-    return fetch(`${this._config.baseUrl}/cards/${cardId}`, {
+    return fetch(`${this._config.url}/cards/${cardId}`, {
       method: "DELETE",
       headers: this._config.headers,
-    }).then(checkResponse);
+    }).then(this.checkResponse);
   }
 
   getProfileInfo() {
-    return fetch(`${this._config.baseUrl}/users/me`, {
+    return fetch(`${this._config.url}/users/me`, {
       method: "GET",
       headers: this._config.headers,
-    }).then(checkResponse);
+    }).then(this.checkResponse);
   }
 
   editProfile(data) {
-    return fetch(`${this._config.baseUrl}/users/me`, {
+    return fetch(`${this._config.url}/users/me`, {
       method: "PATCH",
       headers: this._config.headers,
       body: JSON.stringify({
         name: data.name,
         about: data.about,
       }),
-    }).then(checkResponse);
+    }).then(this.checkResponse);
   }
 
   addLike(cardId) {
-    return fetch(`${this._config.baseUrl}/cards/likes/${cardId}`, {
+    return fetch(`${this._config.url}/cards/likes/${cardId}`, {
       method: "PUT",
       headers: this._config.headers,
-    }).then(checkResponse);
+    }).then(this.checkResponse);
   }
 
   removeLike(cardId) {
-    return fetch(`${this._config.baseUrl}/cards/likes/${cardId}`, {
+    return fetch(`${this._config.url}/cards/likes/${cardId}`, {
       method: "DELETE",
       headers: this._config.headers,
-    }).then(checkResponse);
+    }).then(this.checkResponse);
   }
 
   changeLikeStatus(cardId, isLike) {
-    return fetch(`${this._config.baseUrl}/cards/likes/${cardId}`, {
+    return fetch(`${this._config.url}/cards/likes/${cardId}`, {
       method: isLike ? "DELETE" : "PUT",
       headers: this._config.headers,
-    }).then(checkResponse);
+    }).then(this.checkResponse);
   }
 
   editAvatar(data) {
-    return fetch(`${this._config.baseUrl}/users/me/avatar`, {
+    return fetch(`${this._config.url}/users/me/avatar`, {
       method: "PATCH",
       headers: this._config.headers,
       body: JSON.stringify({
         avatar: data.avatar,
       }),
-    }).then(checkResponse);
+    }).then(this.checkResponse);
   }
 }
 

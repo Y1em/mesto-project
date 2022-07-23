@@ -1,4 +1,4 @@
-function closeByEscape(evt) {
+/* function closeByEscape(evt) {
   if (evt.key === "Escape") {
     const openedPopup = document.querySelector(".popup_opened");
     closePopup(openedPopup);
@@ -29,7 +29,7 @@ export function closePopup(popup) {
 
 export function closePopupByDevice() {
   popupList.forEach(closePopup);
-}
+} */
 
 export const handleDeleteCard = (event) => {
   deleteCardServ(obj._id)
@@ -54,5 +54,20 @@ export const handleChangeLikeStatus = (event) => {
         likeCounter.textContent = obj.likes.length;
       })
       .catch(err => console.log(err));
+  }
+}
+
+export function renderLoading(event, isLoading) {
+  const buttonsList = document.querySelectorAll(".popup__button-confirm");
+  if (isLoading) {
+    event.target.closest(".popup").classList.add("popup_opened");
+    buttonsList.forEach((button) => {
+      button.textContent = "Сохранение...";
+    });
+  } else {
+    event.target.closest(".popup").classList.remove("popup_opened");
+    buttonsList.forEach((button) => {
+      button.textContent = "Сохранить";
+    });
   }
 }

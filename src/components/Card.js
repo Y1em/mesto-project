@@ -1,11 +1,14 @@
+import { popupOpenImage } from "../pages/index.js";
+
 export default class Card {
-  constructor({data, user}, handleDeleteCard, handleChangeLikeStatus) {
+  constructor({data, user}, handleDeleteCard, handleChangeLikeStatus, handleCardClick) {
     this._data = data; // Надо передать карточку с сервера
     this._user = user; // Передать юзера как целый объект
     this._name = data.name;
     this._link = data.link;
     this._handleDeleteCard = handleDeleteCard;
     this._handleChangeLikeStatus = handleChangeLikeStatus;
+    this.handleCardClick = handleCardClick;
   }
   _getCardFromTemplate() {
     const cardTemplate = document.querySelector(".gallery__template").content;
@@ -44,15 +47,14 @@ export default class Card {
       this._likeButton.classList.remove('gallery__like_active');
     }
   }
-  // потом убрать из этого файла
-  openImage() {
-    popupImage.src = this._link;
-    popupImage.alt = this._name;
-    popupSubtitle.textContent = this._name;
-    openPopup(popupPhoto);
+  // потом убрать из этого файла !! Не убирай)
+  handleCardClick(data) {
+    popupOpenImage.open(data);
   }
   _setEventListeners() {
-    this._cardPhoto.addEventListener('click', () => openImage());
+    this._cardPhoto.addEventListener('click', (evt) => {
+      handleCardClick({ name: evt.target.alt, link: evt.target.src })
+    });
     this._deleteButton.addEventListener('click', () => handleDeleteCard());
     this._likeButton.addEventListener('click', () => handleChangeLikeStatus());
   }

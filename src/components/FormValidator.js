@@ -51,7 +51,7 @@ export default class FormValidator {
       });
     });
   }
-  _enableValidation() {
+  enableValidation() {
     this._formList = Array.from(document.querySelectorAll(this._validationConfig.formSelector));
     this._formList.forEach((formEl) => {
       this._formElement.addEventListener("submit", (evt) => {
