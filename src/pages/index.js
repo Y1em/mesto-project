@@ -39,7 +39,7 @@ import { PopupWithForm } from "../components/PopupWithForm";
 const userInfo = new UserInfo({profileName, profileAbout, profileAvatar, profileId}); // должен быть в index.js, т.к. обращается к constants.js, а импорты разрешены только здесь
 // Я убрал const card = new Card({data, user}, handleDeleteCard, handleChangeLikeStatus); // навешать аргументов
 // Добавление стартовых карточек и пользователя
-console.log(userInfo);
+
 const promises = [api.getProfileInfo(), api.getCards()]; // вытаскиваем промисы отдельно, чтоб избежать длинной строки аргументов
 
 Promise.all(promises)

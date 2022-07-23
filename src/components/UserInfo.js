@@ -1,8 +1,8 @@
 export default class UserInfo {
-  constructor({nameSelector, aboutSelector, avatarSelector, id}) { // сюда передаем разметку из userInfo (index.js). И да, тут аватар и id, хотя в брифе не описано
-    this._name = document.querySelector(nameSelector);
-    this._about = document.querySelector(aboutSelector);
-    this._avatar = document.querySelector(avatarSelector);
+  constructor({name, about, avatar, id}) { // сюда передаем разметку из userInfo (index.js). И да, тут аватар и id, хотя в брифе не описано
+    this._name = name;
+    this._about = about;
+    this._avatar = avatar;
     this._id = id;
   }
   getUserInfo() { // тогда здесь будет просто вывод текущих значений в полях разметки
