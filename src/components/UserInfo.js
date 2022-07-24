@@ -11,6 +11,7 @@ export default class UserInfo {
       avatar: this._avatar.src,
       _id: this._id
     }
+    console.dir(profileInfo);
     return profileInfo;
   }
   setUserInfo(data) { // перезапись полей, на входе объект

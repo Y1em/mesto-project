@@ -20,21 +20,21 @@ import {
   validationConfig,
   popupImage,
 
-
 } from "../utils/constants.js";
 
 import { Popup } from "../components/Popup.js"
 import { PopupWithImage } from "../components/PopupWithImage.js"
 import { PopupWithForm } from "../components/PopupWithForm";
-import { fillProfileInputs, } from "../utils/utils.js";
+import { fillProfileInputs, updateUserInfo } from "../utils/utils.js";
 
 import { api } from "../components/Api.js"; // теперь можно доставать методы изнутри api.getCards()
 import Card from "../components/Card.js";
 import FormValidator from "../components/FormValidator.js";
 import UserInfo from "../components/UserInfo.js";
 
-const userInfo = new UserInfo({nameSelector, aboutSelector, avatarSelector}); // должен быть в index.js, т.к. обращается к constants.js, а импорты разрешены только здесь
-// Я убрал const card = new Card({data, user}, handleDeleteCard, handleChangeLikeStatus); // навешать аргументов
+export const userInfo = new UserInfo({nameSelector, aboutSelector, avatarSelector}); // должен быть в index.js, т.к. обращается к constants.js, а импорты разрешены только здесь
+// const card = new Card({data, user}, handleDeleteCard, handleChangeLikeStatus); // навешать аргументов
+
 // Добавление стартовых карточек и пользователя
 
 const promises = [api.getProfileInfo(), api.getCards()]; // вытаскиваем промисы отдельно, чтоб избежать длинной строки аргументов
@@ -55,13 +55,6 @@ addButton.addEventListener("click", function () {
   cardValidator.hideErrorAfterClose();
   popupAddCard.open();
 });
-
-
-/* api.addCardServ({
-url: "https://www.1zoom.ru/big2/51/219186-frederika.jpg",
-place: "werwer"
-}) */
-
 
 // Попап редактировать профиль
 

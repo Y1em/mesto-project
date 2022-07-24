@@ -1,4 +1,6 @@
 import { inputName, inputAbout } from "./constants.js";
+import { api } from "../components/Api.js";
+import { userInfo } from "../pages/index.js";
 
 /* function closeByEscape(evt) {
   if (evt.key === "Escape") {
@@ -33,7 +35,7 @@ export function closePopupByDevice() {
   popupList.forEach(closePopup);
 } */
 
-export const handleDeleteCard = (event) => {
+/* export const handleDeleteCard = (event) => {
   deleteCardServ(obj._id)
     .then(() => {
       event.target.closest(".gallery__card").remove();
@@ -57,7 +59,7 @@ export const handleChangeLikeStatus = (event) => {
       })
       .catch(err => console.log(err));
   }
-}
+} */
 
 export function renderLoading(event, isLoading) {
   const buttonsList = document.querySelectorAll(".popup__button-confirm");
@@ -78,3 +80,15 @@ export function fillProfileInputs(dataUser) {
   inputName.value = dataUser.name;
   inputAbout.value = dataUser.about;
 }
+
+export function updateUserInfo(e) {
+  api.getProfileInfo()
+    .then((user) => {
+      console.dir(user);
+      userInfo.setUserInfo(user)
+    })
+    .catch((err) => console.log(err))
+    .finally(() => {
+      renderLoading(e, false);
+    });
+  }

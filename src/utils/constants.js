@@ -1,5 +1,4 @@
 // from index.js
-
 export let profileId = "";
 
 export const editButton = document.querySelector(".profile__button-edit");

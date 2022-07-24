@@ -55,8 +55,10 @@ export default class FormValidator {
   enableValidation() {
       this._formElement.addEventListener("submit", (evt) => {
         evt.preventDefault();
+        this._disableButton();
       });
       this._setEventListeners();
+
   }
   hideErrorAfterClose() { // этот будем вызывать для каждого попапа отдельно
 

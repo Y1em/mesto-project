@@ -18,7 +18,6 @@ class Api {
   }
 
   getCards() {
-
     return fetch(`${this._config.url}/cards`, {
       method: "GET",
       headers: this._config.headers,

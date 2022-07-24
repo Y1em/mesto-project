@@ -1,10 +1,10 @@
 import { Popup } from "./Popup.js";
-import { renderLoading } from "../utils/utils.js";
+import { renderLoading, updateUserInfo } from "../utils/utils.js";
 
 export class PopupWithForm extends Popup {
-  constructor(popupSelector, callback) {
+  constructor(popupSelector, apiCallback) {
     super(popupSelector);
-    this.callback = callback;
+    this.apiCallback = apiCallback;
     this._popupForm = this._popup.querySelector('.popup__form');
   }
 
@@ -45,7 +45,12 @@ export class PopupWithForm extends Popup {
     this._popupForm.addEventListener("submit", (evt) => {
       evt.preventDefault();
       renderLoading(evt, true);
-      this.callback(this._getInputValues())
+
+      this.apiCallback(this._getInputValues());
+
+      updateUserInfo(evt);
+
+      this.close();
       })
   }
 }
