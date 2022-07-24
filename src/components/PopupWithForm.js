@@ -9,26 +9,44 @@ export class PopupWithForm extends Popup {
   }
 
   _getInputValues() {
-    const inputUrl = this._popupForm.elements.url;
-    const inputPlace = this._popupForm.elements.place;
-    const inputName = this._popupForm.elements.name;
-    const inputAbout = this._popupForm.elements.about;
-    const inputAvatar = this._popupForm.elements.avatar;
+    if (this._popupForm.classList.contains('popup__form_place_new-place')) {
+      const inputPlaceData = {
+        name: this._popupForm.elements.place.value,
+        link: this._popupForm.elements.url.value,
+      }
+      return inputPlaceData
+    } else
+    if (this._popupForm.classList.contains('popup__form_place_edit-avatar')) {
+      const inputAvatarData = {
+        avatar: this._popupForm.elements.avatar.value,
+      }
+      return inputAvatarData
+    } else
+    if (this._popupForm.classList.contains('popup__form_place_edit-profile')) {
+      const inputUserData = {
+        name: this._popupForm.elements.name.value,
+        about: this._popupForm.elements.about.value,
+      }
+      return inputUserData
+    }
   }
 
   close() {
     super.close();
-    if (this._popupForm.classList.contains('popup__form_place_edit-avatar') || this._popupForm.classList.contains('popup__form_place_new-place')) {
-      this._popupForm.reset();
+    if (
+      this._popupForm.classList.contains('popup__form_place_edit-avatar') ||
+      this._popupForm.classList.contains('popup__form_place_new-place')) {
+        this._popupForm.reset();
     }
   }
 
-  setEventListeners() {
+  setEventListeners () {
     super.setEventListeners();
-    this._popupForm.addEventListener("submit", function (evt) {
+    this._popupForm.addEventListener("submit", (evt) => {
       evt.preventDefault();
       renderLoading(evt, true);
-    })
+      this.callback(this._getInputValues())
+      })
   }
 }
 

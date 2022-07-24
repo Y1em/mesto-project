@@ -25,20 +25,13 @@ import {
 
 import { Popup } from "../components/Popup.js"
 import { PopupWithImage } from "../components/PopupWithImage.js"
-
+import { PopupWithForm } from "../components/PopupWithForm";
 import { fillProfileInputs, } from "../utils/utils.js";
-import {
 
-  handlePlaceSubmit,
-  handleProfileSubmit,
-  handleAvatarSubmit,
-  renderLoading,
-} from "../components/modal.js";
 import { api } from "../components/Api.js"; // теперь можно доставать методы изнутри api.getCards()
 import Card from "../components/Card.js";
 import FormValidator from "../components/FormValidator.js";
 import UserInfo from "../components/UserInfo.js";
-import { PopupWithForm } from "../components/PopupWithForm";
 
 const userInfo = new UserInfo({nameSelector, aboutSelector, avatarSelector}); // должен быть в index.js, т.к. обращается к constants.js, а импорты разрешены только здесь
 // Я убрал const card = new Card({data, user}, handleDeleteCard, handleChangeLikeStatus); // навешать аргументов
@@ -63,6 +56,13 @@ addButton.addEventListener("click", function () {
   popupAddCard.open();
 });
 
+
+/* api.addCardServ({
+url: "https://www.1zoom.ru/big2/51/219186-frederika.jpg",
+place: "werwer"
+}) */
+
+
 // Попап редактировать профиль
 
 const popupEditProfile = new PopupWithForm(".popup_place_edit-profile", api.editProfile);
@@ -71,7 +71,6 @@ popupEditProfile.setEventListeners();
 editButton.addEventListener("click", function () {
   fillProfileInputs(userInfo.getUserInfo());
   popupEditProfile.open();
-
 });
 
 // Попап редактировать аватар

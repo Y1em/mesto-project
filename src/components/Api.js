@@ -1,5 +1,5 @@
 class Api {
-  constructor(options) {
+  constructor() {
     this._config = {
       url: 'https://mesto.nomoreparties.co/v1/plus-cohort-13',
       headers: {
@@ -18,13 +18,14 @@ class Api {
   }
 
   getCards() {
+
     return fetch(`${this._config.url}/cards`, {
       method: "GET",
       headers: this._config.headers,
     }).then(this.checkResponse);
   }
 
-  addCardServ(data) {
+  addCardServ = (data) => {
     return fetch(`${this._config.url}/cards`, {
       method: "POST",
       headers: this._config.headers,
@@ -49,7 +50,7 @@ class Api {
     }).then(this.checkResponse);
   }
 
-  editProfile(data) {
+  editProfile = (data) => {
     return fetch(`${this._config.url}/users/me`, {
       method: "PATCH",
       headers: this._config.headers,
@@ -81,7 +82,7 @@ class Api {
     }).then(this.checkResponse);
   }
 
-  editAvatar(data) {
+  editAvatar = (data) => {
     return fetch(`${this._config.url}/users/me/avatar`, {
       method: "PATCH",
       headers: this._config.headers,
