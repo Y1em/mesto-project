@@ -1,7 +1,7 @@
-import { Popup } from "./Popup.js";
+import Popup from "./Popup.js";
 import { renderLoading, updateUserInfo } from "../utils/utils.js";
 
-export class PopupWithForm extends Popup {
+export default class PopupWithForm extends Popup {
   constructor(popupSelector, apiCallback) {
     super(popupSelector);
     this.apiCallback = apiCallback;

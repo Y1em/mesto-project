@@ -1,4 +1,4 @@
-export class Popup {
+export default class Popup {
   constructor(popupSelector) {
     this._popup = document.querySelector(popupSelector);
   }
@@ -27,6 +27,9 @@ export class Popup {
             this.close();
       }
     });
+  }
+  returnPopup() {
+    return this._popup;
   }
 }
 

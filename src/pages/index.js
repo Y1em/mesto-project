@@ -22,18 +22,70 @@ import {
 
 } from "../utils/constants.js";
 
-import { Popup } from "../components/Popup.js"
-import { PopupWithImage } from "../components/PopupWithImage.js"
-import { PopupWithForm } from "../components/PopupWithForm";
+import Popup from "../components/Popup.js"
+import PopupWithImage from "../components/PopupWithImage.js"
+import PopupWithForm from "../components/PopupWithForm";
 import { fillProfileInputs, updateUserInfo } from "../utils/utils.js";
 
 import { api } from "../components/Api.js"; // теперь можно доставать методы изнутри api.getCards()
 import Card from "../components/Card.js";
 import FormValidator from "../components/FormValidator.js";
 import UserInfo from "../components/UserInfo.js";
+import Section from "../components/Section";
 
 export const userInfo = new UserInfo({nameSelector, aboutSelector, avatarSelector}); // должен быть в index.js, т.к. обращается к constants.js, а импорты разрешены только здесь
 // const card = new Card({data, user}, handleDeleteCard, handleChangeLikeStatus); // навешать аргументов
+
+const user = userInfo.getUserInfo();
+
+const cardOpenedImage = new PopupWithImage(popupPhoto);
+
+const cardClick = (subtitle, link) => {
+	cardOpenedImage.open(subtitle, link);
+}
+
+const renderCard = (data, user, cardSelector) => {
+  const card = new Card({
+		data: data,
+		user: user,
+		handleChangeLikeStatus: (cardId) => {
+			if (card.isLiked()) {
+				api.removelike(cardId)
+					.then((data) => {
+						card.updateLikesState(data)
+					})
+					.catch(err => console.log(err));
+			} else {
+				api.addlike(cardId)
+					.then((data) => {
+						card.updateLikesState(data)
+					})
+					.catch(err => console.log(err));
+			}
+		},
+		handleDeleteCard: (cardId) => {
+			api.deleteCardServ(cardId)
+      .then(() => {
+        card.remove();
+        card = null;
+      })
+      .catch(err => console.log(err));
+		},
+    handleCardClick: (subtitle, link) => {
+			cardClick(subtitle, link);
+		}, cardSelector
+	});
+	return card;
+}
+
+const renderedList = new Section({
+  data: {},
+  renderer: (item, user) => {
+    const card = renderCard(item, user, ".gallery__template");
+    const element = card.generateCard();
+    renderedList.appendItem(element);
+  }
+})
 
 // Добавление стартовых карточек и пользователя
 
