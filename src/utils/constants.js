@@ -42,7 +42,8 @@ export const popupEditAvatar = document.querySelector(".popup_place_edit-avatar"
 export const inputPlace = document.querySelector(".popup__input_el_place");
 export const inputUrl = document.querySelector(".popup__input_el_url");
 export const formNewPlace = document.querySelector(".popup__form_place_new-place");
-export const gallery = document.querySelector(".gallery");
+//export const gallery = document.querySelector(".gallery");
+export const gallery = ".gallery";
 export const buttonConfirmPlace = formNewPlace.querySelector(".popup__button-confirm");
 export const buttonConfirmAvatar = popupEditAvatar.querySelector(
   ".popup__button-confirm"

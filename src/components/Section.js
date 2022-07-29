@@ -5,14 +5,17 @@ export default class Section {
 У класса Section нет своей разметки. Он получает разметку через функцию-колбэк и вставляет её в контейнер.
 */
   constructor({items, renderer}, containerSelector) {
-    this._items = data; // items — массив данных от Api
+    this._items = items; // items — массив данных от Api
     this._renderer = renderer; // renderer — это функция, которая отвечает за создание и отрисовку данных на странице
     this._container = document.querySelector(containerSelector); // селектор контейнера, в который нужно добавлять созданные элементы.
   }
-  renderer() {
-
+  addItem(userInfo) {
+    this._items.forEach(item => this._renderer(item, userInfo));
   }
-  addItem(domelement, container) {
-
+  appendItem(item) {
+    this._container.append(item);
+  }
+  renderItems(data) {
+    this._items = data;
   }
 }

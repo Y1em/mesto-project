@@ -31,9 +31,52 @@ import { api } from "../components/Api.js"; // теперь можно дост�
 import Card from "../components/Card.js";
 import FormValidator from "../components/FormValidator.js";
 import UserInfo from "../components/UserInfo.js";
+import Section from "../components/Section";
 
 export const userInfo = new UserInfo({nameSelector, aboutSelector, avatarSelector}); // должен быть в index.js, т.к. обращается к constants.js, а импорты разрешены только здесь
-// const card = new Card({data, user}, handleDeleteCard, handleChangeLikeStatus); // навешать аргументов
+
+const renderCard = (data, user, cardSelector) => {
+  const card = new Card({
+		data: data,
+		user: user,
+		handleChangeLikeStatus: (cardId) => {
+			if (card.isLiked()) {
+				api.removelike(cardId)
+					.then((data) => {
+						card.updateLikesState(data)
+					})
+					.catch(err => console.log(err));
+			} else {
+				api.addlike(cardId)
+					.then((data) => {
+						card.updateLikesState(data)
+					})
+					.catch(err => console.log(err));
+			}
+		},
+		handleDeleteCard: (cardId) => {
+			api.deleteCardServ(cardId)
+      .then(() => {
+        card.remove();
+        card = null;
+      })
+      .catch(err => console.log(err));
+		},
+    handleCardClick: (subtitle, link) => {
+			cardClick(subtitle, link);
+		}
+	}, cardSelector);
+	return card;
+}
+
+const renderedList = new Section({
+  items: {},
+  renderer: (item, user) => {
+    const card = renderCard(item, user, ".gallery__template");
+    const element = card.generateCard();
+    renderedList.appendItem(element);
+  }
+}, gallery);
 
 // Добавление стартовых карточек и пользователя
 
@@ -42,7 +85,8 @@ const promises = [api.getProfileInfo(), api.getCards()]; // вытаскивае
 Promise.all(promises)
   .then(([user, cards]) => {
     userInfo.setUserInfo(user); // получаем данные с сервера ОБЪЕКТОМ и вставляем в разметку
-    card.renderCardsFromSrv(); // c карточками надо чото с рендером делать
+    renderedList.renderItems(cards);
+    renderedList.addItem(user);
   })
   .catch((err) => console.log(err));
 
