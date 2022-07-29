@@ -4,7 +4,6 @@ import { renderLoading, updateUserInfo } from "../utils/utils.js";
 export default class PopupWithForm extends Popup {
   constructor(popupSelector, apiCallback) {
     super(popupSelector);
-    this._popup = super.returnPopup();
     this.apiCallback = apiCallback;
     this._popupForm = this._popup.querySelector('.popup__form');
   }
