@@ -1,4 +1,4 @@
-class Api {
+export default class Api {
   constructor() {
     this._config = {
       url: 'https://mesto.nomoreparties.co/v1/plus-cohort-13',
@@ -35,7 +35,7 @@ class Api {
     }).then(this.checkResponse);
   }
 
-  deleteCardServ(cardId) {
+  deleteCardServ = (cardId) => {
     return fetch(`${this._config.url}/cards/${cardId}`, {
       method: "DELETE",
       headers: this._config.headers,
@@ -60,21 +60,21 @@ class Api {
     }).then(this.checkResponse);
   }
 
-  addLike(cardId) {
+  addLike = (cardId) => {
     return fetch(`${this._config.url}/cards/likes/${cardId}`, {
       method: "PUT",
       headers: this._config.headers,
     }).then(this.checkResponse);
   }
 
-  removeLike(cardId) {
+  removeLike = (cardId) => {
     return fetch(`${this._config.url}/cards/likes/${cardId}`, {
       method: "DELETE",
       headers: this._config.headers,
     }).then(this.checkResponse);
   }
 
-  changeLikeStatus(cardId, isLike) {
+  changeLikeStatus = (cardId, isLike) => {
     return fetch(`${this._config.url}/cards/likes/${cardId}`, {
       method: isLike ? "DELETE" : "PUT",
       headers: this._config.headers,
@@ -91,5 +91,3 @@ class Api {
     }).then(this.checkResponse);
   }
 }
-
-export const api = new Api();

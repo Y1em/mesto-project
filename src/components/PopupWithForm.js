@@ -1,7 +1,8 @@
 import { Popup } from "./Popup.js";
-import { renderLoading, updateUserInfo } from "../utils/utils.js";
+import { renderLoading, handlePlaceSubmit } from "../utils/utils.js";
+import { userInfo } from "../pages/index.js";
 
-export class PopupWithForm extends Popup {
+export default class PopupWithForm extends Popup {
   constructor(popupSelector, apiCallback) {
     super(popupSelector);
     this.apiCallback = apiCallback;
@@ -45,14 +46,31 @@ export class PopupWithForm extends Popup {
     this._popupForm.addEventListener("submit", (evt) => {
       evt.preventDefault();
       renderLoading(evt, true);
-
-      this.apiCallback(this._getInputValues());
-
-      updateUserInfo(evt);
-
+      if (evt.target.classList.contains('popup__form_place_edit-profile') || evt.target.classList.contains('popup__form_place_edit-avatar')) {
+        this.apiCallback(this._getInputValues())
+          .then((user) => {
+            userInfo.setUserInfo(user);
+            userInfo.getUserInfo(user);
+          })
+          .catch((err) => console.log(err))
+          .finally(() => {
+            renderLoading(evt, false);
+          })
+      } else if (evt.target.classList.contains('popup__form_place_new-place')) {
+        this.apiCallback(this._getInputValues())
+          .then((card) => {
+            handlePlaceSubmit(card);
+          })
+          .catch((err) => console.log(err))
+          .finally(() => {
+            renderLoading(evt, false);
+          })
+      }
       this.close();
-      })
+    })
   }
 }
+
+
 
 

@@ -1,22 +1,20 @@
-import { popupOpenImage } from "../pages/index.js";
-
 export default class Card {
   constructor({data, user, handleChangeLikeStatus, handleDeleteCard, handleCardClick}, cardSelector) {
-    this._data = data; // Надо передать карточку с сервера
-    this._user = user; // Передать юзера как целый объект
+    this._data = data;
+    this._user = user;
     this._name = data.name;
     this._link = data.link;
-    this._handleDeleteCard = handleDeleteCard;
     this._handleChangeLikeStatus = handleChangeLikeStatus;
-    this._handleCardClick = handleCardClick;
     this._cardSelector = cardSelector;
+    this._handleDeleteCard = handleDeleteCard;
+    this._handleCardClick = handleCardClick;
   }
 
   _getCardFromTemplate() {
     const cardTemplate = document.querySelector(this._cardSelector).content.querySelector(".gallery__card").cloneNode(true);
     return cardTemplate;
   }
-  
+
   generateCard() {
     this._card = this._getCardFromTemplate();
     this._setEventListeners();
@@ -27,7 +25,7 @@ export default class Card {
     this._cardPhoto.alt = this._name;
     return this._card;
   }
-  
+
   _showDeleteIcon() {
     if (this._data.owner._id !== this._user._id) {
       this._card
@@ -35,7 +33,7 @@ export default class Card {
         .classList.add("gallery__delete_inactive");
     }
   }
-  
+
   isLiked() {
     if (this._data.likes.some((like) => like._id === this._user._id))
 			return true
@@ -52,13 +50,31 @@ export default class Card {
     }
   }
 
+  _handleCardClick(data) {
+    this.handleCardClick(data);
+  }
+
+  _handleDeleteCard(event, id) {
+    this.handleDeleteCard(event, id);
+  }
+
+  _handleChangeLikeStatus(id) {
+    this.handleChangeLikeStatus(id)
+  }
+
   _setEventListeners() {
     this._cardPhoto = this._card.querySelector(".gallery__photo");
     this._deleteButton = this._card.querySelector(".gallery__delete");
     this._likeButton = this._card.querySelector(".gallery__like");
     this._likeCounter = this._card.querySelector(".gallery__like-counter");
-    this._cardPhoto.addEventListener('click', () => this._handleCardClick(this._name, this._link));
-    this._deleteButton.addEventListener('click', () => this._handleDeleteCard(this._card, this._data._id));
-    this._likeButton.addEventListener('click', () => this._handleChangeLikeStatus(this._data._id));
+    this._cardPhoto.addEventListener('click', (evt) => {
+      this._handleCardClick({ name: evt.target.alt, link: evt.target.src })
+    });
+    this._deleteButton.addEventListener('click', (evt) => {
+      this._handleDeleteCard(evt, this._data._id);
+    });
+    this._likeButton.addEventListener('click', () => {
+      this._handleChangeLikeStatus(this._data._id);
+    });
   }
 }

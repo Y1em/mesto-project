@@ -1,65 +1,5 @@
-import { inputName, inputAbout } from "./constants.js";
-import { api } from "../components/Api.js";
-import { userInfo } from "../pages/index.js";
-
-/* function closeByEscape(evt) {
-  if (evt.key === "Escape") {
-    const openedPopup = document.querySelector(".popup_opened");
-    closePopup(openedPopup);
-  }
-}
-
-function closeByOverlay(evt) {
-  if (
-    evt.target.classList.contains("popup") ||
-    evt.target.classList.contains("popup__container")
-  ) {
-    const openedPopup = document.querySelector(".popup_opened");
-    closePopup(openedPopup);
-  }
-}
-
-export function openPopup(popup) {
-  popup.classList.add("popup_opened");
-  document.addEventListener("keydown", closeByEscape);
-  document.addEventListener("mousedown", closeByOverlay);
-}
-
-export function closePopup(popup) {
-  popup.classList.remove("popup_opened");
-  document.removeEventListener("keydown", closeByEscape);
-  document.removeEventListener("mousedown", closeByOverlay);
-}
-
-export function closePopupByDevice() {
-  popupList.forEach(closePopup);
-} */
-
-/* export const handleDeleteCard = (event) => {
-  deleteCardServ(obj._id)
-    .then(() => {
-      event.target.closest(".gallery__card").remove();
-    })
-    .catch(err => console.log(err));
-}
-
-export const handleChangeLikeStatus = (event) => {
-  if (event.target.classList.contains("gallery__like_active")) {
-    changeLikeStatus(cardId)
-      .then((cardId) => {
-        event.target.classList.remove("gallery__like_active");
-        likeCounter.textContent = obj.likes.length;
-      })
-      .catch(err => console.log(err));
-  } else {
-    addLike(cardId)
-      .then((cardId) => {
-        event.target.classList.add("gallery__like_active");
-        likeCounter.textContent = obj.likes.length;
-      })
-      .catch(err => console.log(err));
-  }
-} */
+import { inputName, inputAbout, gallery } from "./constants.js";
+import { userInfo, renderCard } from "../pages/index.js";
 
 export function renderLoading(event, isLoading) {
   const buttonsList = document.querySelectorAll(".popup__button-confirm");
@@ -81,14 +21,11 @@ export function fillProfileInputs(dataUser) {
   inputAbout.value = dataUser.about;
 }
 
-export function updateUserInfo(e) {
-  api.getProfileInfo()
-    .then((user) => {
-      console.dir(user);
-      userInfo.setUserInfo(user)
-    })
-    .catch((err) => console.log(err))
-    .finally(() => {
-      renderLoading(e, false);
-    });
-  }
+function addDomCard(container, card) {
+  container.prepend(card);
+}
+
+export function handlePlaceSubmit(data) {
+  const card = renderCard(data, userInfo.getUserInfo, ".gallery__template");
+  addDomCard(gallery, card.generateCard());
+}
