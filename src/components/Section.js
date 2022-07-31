@@ -13,4 +13,8 @@ export default class Section {
   renderItems(data) {
     this._items = data;
   }
+  prependItem(item) {
+    this._container.prepend(item);
+  }
+
 }

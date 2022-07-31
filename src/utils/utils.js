@@ -1,5 +1,7 @@
-import { inputName, inputAbout, gallery } from "./constants.js";
-import { userInfo, renderCard } from "../pages/index.js";
+import { inputName, inputAbout, gallerySelector } from "./constants.js";
+import { renderCard } from "../pages/index.js";
+import { api } from "../pages/index.js";
+import Section from "../components/Section.js";
 
 export function renderLoading(event, isLoading) {
   const buttonsList = document.querySelectorAll(".popup__button-confirm");
@@ -21,11 +23,18 @@ export function fillProfileInputs(dataUser) {
   inputAbout.value = dataUser.about;
 }
 
-function addDomCard(container, card) {
-  container.prepend(card);
-}
-
 export function handlePlaceSubmit(data) {
-  const card = renderCard(data, userInfo.getUserInfo, ".gallery__template");
-  addDomCard(gallery, card.generateCard());
+  api.getProfileInfo()
+    .then((user) => {
+      renderedList.addItem(user);
+    })
+
+  const renderedList = new Section({
+    items: [data],
+    renderer: (item, user) => {
+      const card = renderCard(item, user, ".gallery__template");
+      const element = card.generateCard();
+      renderedList.prependItem(element);
+    }
+  }, gallerySelector);
 }

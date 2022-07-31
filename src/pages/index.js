@@ -23,7 +23,7 @@ import FormValidator from "../components/FormValidator.js";
 import UserInfo from "../components/UserInfo.js";
 import Section from "../components/Section";
 
-const api = new Api();
+export const api = new Api();
 
 export const userInfo = new UserInfo({nameSelector, aboutSelector, avatarSelector});
 
@@ -34,7 +34,6 @@ const promises = [api.getProfileInfo(), api.getCards()];
 Promise.all(promises)
   .then(([user, cards]) => {
     userInfo.setUserInfo(user);
-    userInfo.getUserInfo(user);
     renderedList.renderItems(cards);
     renderedList.addItem(user);
   })
@@ -123,5 +122,7 @@ const avatarValidator = new FormValidator(validationConfig, formEditAvatar);
 avatarValidator.enableValidation();
 const cardValidator = new FormValidator(validationConfig, formNewPlace);
 cardValidator.enableValidation();
+
+
 
 
