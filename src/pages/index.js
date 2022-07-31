@@ -83,12 +83,10 @@ const renderedList = new Section({
 
 // Попап добававить карточку
 
-const popupAddCard = new PopupWithForm('.popup_place_new-place', api.addCardServ); //добавить кетч?
-popupAddCard.setEventListeners();
+const popupAddCard = new PopupWithForm('.popup_place_new-place', api.addCardServ);
 addButton.addEventListener("click", function () {
   cardValidator.hideErrorAfterClose();
   popupAddCard.open();
-
 });
 
 // Попап редактировать профиль
