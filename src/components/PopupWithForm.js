@@ -1,76 +1,50 @@
 import { Popup } from "./Popup.js";
-import { renderLoading, handlePlaceSubmit } from "../utils/utils.js";
-import { userInfo } from "../pages/index.js";
 
 export default class PopupWithForm extends Popup {
-  constructor(popupSelector, apiCallback) {
+  constructor(popupSelector, apiCallback, updateInfo) {
     super(popupSelector);
     this.apiCallback = apiCallback;
-    this._popupForm = this._popup.querySelector('.popup__form');
+    this.updateInfo = updateInfo;
+    this._popupForm = this._popup.querySelector(".popup__form");
+    this._submitButton = this._popup.querySelector(".popup__button-confirm");
   }
 
   _getInputValues() {
-    if (this._popupForm.classList.contains('popup__form_place_new-place')) {
-      const inputPlaceData = {
-        name: this._popupForm.elements.place.value,
-        link: this._popupForm.elements.url.value,
-      }
-      return inputPlaceData
-    } else
-    if (this._popupForm.classList.contains('popup__form_place_edit-avatar')) {
-      const inputAvatarData = {
-        avatar: this._popupForm.elements.avatar.value,
-      }
-      return inputAvatarData
-    } else
-    if (this._popupForm.classList.contains('popup__form_place_edit-profile')) {
-      const inputUserData = {
-        name: this._popupForm.elements.name.value,
-        about: this._popupForm.elements.about.value,
-      }
-      return inputUserData
-    }
+    this._inputList = this._popupForm.querySelectorAll(".popup__input");
+    this._formValues = {};
+    this._inputList.forEach((input) => {
+      this._formValues[input.name] = input.value;
+    });
+    return this._formValues;
   }
 
   close() {
     super.close();
-    if (
-      this._popupForm.classList.contains('popup__form_place_edit-avatar') ||
-      this._popupForm.classList.contains('popup__form_place_new-place')) {
-        this._popupForm.reset();
+    this._popupForm.reset();
+  }
+
+  _renderLoading(isLoading) {
+    if (isLoading) {
+      this._submitButton.textContent = "Сохранение...";
+    } else {
+      this._submitButton.textContent = "Сохранить";
     }
   }
 
-  setEventListeners () {
+  setEventListeners() {
     super.setEventListeners();
     this._popupForm.addEventListener("submit", (evt) => {
       evt.preventDefault();
-      renderLoading(evt, true);
-      if (evt.target.classList.contains('popup__form_place_edit-profile') || evt.target.classList.contains('popup__form_place_edit-avatar')) {
-        this.apiCallback(this._getInputValues())
-          .then((user) => {
-            userInfo.setUserInfo(user);
-            userInfo.getUserInfo(user);
-          })
-          .catch((err) => console.log(err))
-          .finally(() => {
-            renderLoading(evt, false);
-          })
-      } else if (evt.target.classList.contains('popup__form_place_new-place')) {
-        this.apiCallback(this._getInputValues())
-          .then((card) => {
-            handlePlaceSubmit(card);
-          })
-          .catch((err) => console.log(err))
-          .finally(() => {
-            renderLoading(evt, false);
-          })
-      }
+      this._renderLoading(true);
+      this.apiCallback(this._getInputValues())
+        .then((data) => {
+          this.updateInfo(data);
+        })
+        .catch((err) => console.log(err))
+        .finally(() => {
+          this._renderLoading(false);
+        });
       this.close();
-    })
+    });
   }
 }
-
-
-
-
