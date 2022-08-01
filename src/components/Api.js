@@ -1,13 +1,13 @@
 export default class Api {
-  constructor() {
-    this._config = {
+  constructor(config) {
+    this._config = config;
+    /* {
       url: "https://mesto.nomoreparties.co/v1/plus-cohort-13",
       headers: {
         authorization: "eeb10f4c-568d-4124-bc82-28113d2b839d",
         "Content-Type": "application/json",
-      },
+      } */
     };
-  }
 
   checkResponse(res) {
     if (res.ok) {

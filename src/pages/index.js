@@ -5,15 +5,12 @@ import {
   aboutSelector,
   avatarSelector,
   gallerySelector,
-  formNewPlace,
-  formEditProfile,
-  formEditAvatar,
   addButton,
   editButton,
   editAvatar,
   validationConfig,
+  apiConfig,
 } from "../utils/constants.js";
-import { fillProfileInputs } from "../utils/utils.js";
 
 import PopupWithImage from "../components/PopupWithImage.js";
 import PopupWithForm from "../components/PopupWithForm";
@@ -23,11 +20,9 @@ import FormValidator from "../components/FormValidator.js";
 import UserInfo from "../components/UserInfo.js";
 import Section from "../components/Section";
 
-const api = new Api();
+const api = new Api(apiConfig);
 
 const userInfo = new UserInfo({ nameSelector, aboutSelector, avatarSelector });
-
-
 
 // Добавление стартовых карточек и пользователя
 
@@ -116,7 +111,6 @@ const popupAddCard = new PopupWithForm(
 );
 popupAddCard.setEventListeners();
 addButton.addEventListener("click", function () {
-  cardValidator.hideErrorAfterClose();
   popupAddCard.open();
 });
 
@@ -131,7 +125,7 @@ const popupEditProfile = new PopupWithForm(
 );
 popupEditProfile.setEventListeners();
 editButton.addEventListener("click", function () {
-  fillProfileInputs(userInfo.getUserInfo());
+  popupEditProfile.setInputValues(userInfo.getUserInfo());
   popupEditProfile.open();
 });
 
@@ -146,7 +140,6 @@ const popupEditAvatar = new PopupWithForm(
 );
 popupEditAvatar.setEventListeners();
 editAvatar.addEventListener("click", function () {
-  avatarValidator.hideErrorAfterClose();
   popupEditAvatar.open();
 });
 
@@ -157,9 +150,14 @@ popupOpenImage.setEventListeners();
 
 // Валидация
 
-const profileValidator = new FormValidator(validationConfig, formEditProfile);
-profileValidator.enableValidation();
-const avatarValidator = new FormValidator(validationConfig, formEditAvatar);
-avatarValidator.enableValidation();
-const cardValidator = new FormValidator(validationConfig, formNewPlace);
-cardValidator.enableValidation();
+const formValidators = {}
+const enableValidation = (config) => {
+  const formList = Array.from(document.querySelectorAll(config.formSelector))
+  formList.forEach((formElement) => {
+    const validator = new FormValidator(config, formElement);
+    const formName = formElement.getAttribute('name');
+    formValidators[formName] = validator;
+    validator.enableValidation();
+  });
+};
+enableValidation(validationConfig);

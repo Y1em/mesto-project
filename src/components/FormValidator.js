@@ -2,6 +2,7 @@ export default class FormValidator {
   constructor(validationConfig, formElement) {
     this._validationConfig = validationConfig;
     this._formElement = formElement;
+    this._formSelector = validationConfig.formSelector;
     this._inputList = Array.from(
       this._formElement.querySelectorAll(this._validationConfig.inputSelector)
     );
@@ -62,17 +63,17 @@ export default class FormValidator {
         this._toggleButtonState();
       });
     });
+    this._formElement.addEventListener('reset', () => {
+      this._disableButton();
+      this._inputList.forEach((inputElement) => {
+        this._hideInputError(inputElement)
+      })
+    });
   }
   enableValidation() {
     this._formElement.addEventListener("submit", (evt) => {
       evt.preventDefault();
-      this._disableButton();
     });
     this._setEventListeners();
-  }
-  hideErrorAfterClose() {
-    this._inputList.forEach((inputElement) => {
-      this._hideInputError(inputElement);
-    });
   }
 }
