@@ -27,6 +27,8 @@ const api = new Api();
 
 const userInfo = new UserInfo({ nameSelector, aboutSelector, avatarSelector });
 
+
+
 // Добавление стартовых карточек и пользователя
 
 const promises = [api.getProfileInfo(), api.getCards()];
@@ -38,6 +40,8 @@ Promise.all(promises)
     renderedList.addItem(user);
   })
   .catch((err) => console.log(err));
+
+
 
 const renderCard = (data, user, cardSelector) => {
   const card = new Card(
@@ -96,9 +100,6 @@ const popupAddCard = new PopupWithForm(
   ".popup_place_new-place",
   api.addCardServ,
   (data) => {
-    api.getProfileInfo().then((user) => {
-      renderedList.addItem(user);
-    });
     const renderedList = new Section(
       {
         items: [data],
@@ -110,6 +111,7 @@ const popupAddCard = new PopupWithForm(
       },
       gallerySelector
     );
+    renderedList.addItem(userInfo.getUserInfo());
   }
 );
 popupAddCard.setEventListeners();
@@ -125,7 +127,6 @@ const popupEditProfile = new PopupWithForm(
   api.editProfile,
   (user) => {
     userInfo.setUserInfo(user);
-    userInfo.getUserInfo(user);
   }
 );
 popupEditProfile.setEventListeners();
@@ -141,7 +142,6 @@ const popupEditAvatar = new PopupWithForm(
   api.editAvatar,
   (user) => {
     userInfo.setUserInfo(user);
-    userInfo.getUserInfo(user);
   }
 );
 popupEditAvatar.setEventListeners();
