@@ -31,8 +31,8 @@ const promises = [api.getProfileInfo(), api.getCards()];
 Promise.all(promises)
   .then(([user, cards]) => {
     userInfo.setUserInfo(user);
-    renderedList.renderItems(cards);
-    renderedList.addItem(user);
+    renderedList.setItems(cards);
+    renderedList.renderItems(user);
   })
   .catch((err) => console.log(err));
 
@@ -91,24 +91,20 @@ const renderedList = new Section(
 
 // Попап добававить карточку
 
-const popupAddCard = new PopupWithForm(
-  ".popup_place_new-place",
-  api.addCardServ,
-  (data) => {
-    const renderedList = new Section(
-      {
-        items: [data],
-        renderer: (item, user) => {
-          const card = renderCard(item, user, ".gallery__template");
-          const element = card.generateCard();
-          renderedList.prependItem(element);
-        },
-      },
-      gallerySelector
-    );
-    renderedList.addItem(userInfo.getUserInfo());
-  }
-);
+const popupAddCard = new PopupWithForm({
+  popupSelector: ".popup_place_new-place",
+  updateInfo: (field) => {
+		api.addCardServ({
+			name: field.title,
+			link: field.link
+		})
+			.then(data => {
+				const card = renderCard(data, userInfo.getUserInfo(), ".gallery__template");
+				renderedList.prependItem(card.generateCard());
+			})
+			.catch(err => console.log(err));
+	}
+});
 popupAddCard.setEventListeners();
 addButton.addEventListener("click", function () {
   popupAddCard.open();
