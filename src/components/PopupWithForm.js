@@ -1,9 +1,10 @@
 import { Popup } from "./Popup.js";
 
 export default class PopupWithForm extends Popup {
-  constructor({popupSelector, submitHandler}) {
+  constructor(popupSelector, apiCallback, updateInfo) {
     super(popupSelector);
-    this.submitHandler = submitHandler;
+    this.apiCallback = apiCallback;
+    this.updateInfo = updateInfo;
     this._popupForm = this._popup.querySelector(".popup__form");
     this._submitButton = this._popup.querySelector(".popup__button-confirm");
     this._inputList = this._popupForm.querySelectorAll(".popup__input");
@@ -20,6 +21,7 @@ export default class PopupWithForm extends Popup {
 
   close() {
     super.close();
+    this._popupForm.reset();
   }
 
   _renderLoading(isLoading, loadingText='Сохранение...') {
@@ -35,8 +37,7 @@ export default class PopupWithForm extends Popup {
       input.value = userData[input.name];
     });
   }
-/*
-  // оригинал
+
   setEventListeners() {
     super.setEventListeners();
     this._popupForm.addEventListener("submit", (evt) => {
@@ -52,17 +53,5 @@ export default class PopupWithForm extends Popup {
           this._renderLoading(false);
         });
     });
-  }
-*/
-  setEventListeners() {
-    super.setEventListeners();
-    this._popupForm.addEventListener("submit", (evt) => {
-      evt.preventDefault();
-      this._renderLoading(true);
-      this.submitHandler(this._getInputValues());
-      this._renderLoading(false);
-    });
-    this.close();
-    this._popupForm.reset();
   }
 }

@@ -11,11 +11,6 @@ export default class Card {
     this._cardSelector = cardSelector;
     this._handleDeleteCard = handleDeleteCard;
     this._handleCardClick = handleCardClick;
-    
-    this._cardPhoto = this._card.querySelector(".gallery__photo");
-    this._deleteButton = this._card.querySelector(".gallery__delete");
-    this._likeButton = this._card.querySelector(".gallery__like");
-    this._likeCounter = this._card.querySelector(".gallery__like-counter");
   }
 
   _getCardFromTemplate() {
@@ -74,6 +69,10 @@ export default class Card {
   }
 
   _setEventListeners() {
+    this._cardPhoto = this._card.querySelector(".gallery__photo");
+    this._deleteButton = this._card.querySelector(".gallery__delete");
+    this._likeButton = this._card.querySelector(".gallery__like");
+    this._likeCounter = this._card.querySelector(".gallery__like-counter");
     this._cardPhoto.addEventListener("click", (evt) => {
       this._handleCardClick({ name: evt.target.alt, link: evt.target.src });
     });
