@@ -1,6 +1,7 @@
 import "../styles/index.css";
 
 import {
+  renderedList,
   nameSelector,
   aboutSelector,
   avatarSelector,
@@ -67,20 +68,19 @@ const renderCard = (data, user, cardSelector) => {
   return card;
 };
 
-const renderedList = new Section(
-  {
-    items: {},
-    renderer: (item, user) => {
-      const card = renderCard(item, user, ".gallery__template");
-      const element = card.generateCard();
-      renderedList.appendItem(element);
-    },
-  },
-  gallerySelector
-);
-
 Promise.all(promises)
   .then(([user, cards]) => {
+    renderedList = new Section(
+      {
+        items: cards,
+        renderer: (item, user) => {
+          const card = renderCard(item, user, ".gallery__template");
+          const element = card.generateCard();
+          renderedList.appendItem(element);
+        },
+      },
+      gallerySelector
+    );
     userInfo.setUserInfo(user);
     renderedList.renderItems(user);
     renderedList.setItems(cards);

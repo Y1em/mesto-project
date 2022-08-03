@@ -1,5 +1,5 @@
 // to index.js
-
+export let renderedList = [];
 export const nameSelector = ".profile__name";
 export const aboutSelector = ".profile__about";
 export const avatarSelector = ".profile__image";
