@@ -1,7 +1,6 @@
 import "../styles/index.css";
 
 import {
-  renderedList,
   nameSelector,
   aboutSelector,
   avatarSelector,
@@ -67,6 +66,8 @@ const renderCard = (data, user, cardSelector) => {
   );
   return card;
 };
+
+let renderedList = [];
 
 Promise.all(promises)
   .then(([user, cards]) => {
